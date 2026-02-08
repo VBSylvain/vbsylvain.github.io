@@ -85,7 +85,7 @@
           <a class="nav-link js-scroll-trigger" href="#interests">Hobbies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="mailto:contact@vbsylvain.fr">Contact</a>
+          <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
         </li>
       </ul>
     </div>
@@ -163,6 +163,7 @@
             <i class="fas fa-asterisk"></i>
           </a>
         </div>
+        <a class="btn btn-primary js-scroll-trigger mt-3" href="#contact">Me contacter</a>
       </div>
     </section>
 
@@ -968,6 +969,8 @@
             <i class="far fa-star small"></i>
           </li>
         </ul>
+        <p class="mt-5">Vous avez un projet ?</p>
+        <a class="btn btn-primary js-scroll-trigger" href="#contact">Discutons-en</a>
       </div>
 
     </section>
@@ -1230,7 +1233,26 @@
 
     <hr class="m-0">
 
-    <!-- TODO Obviously, i'll need a contact form. And I would like to put some CTA throughout the page to get to this contact form -->
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+      <div class="w-100">
+        <h2 class="mb-5">Contact</h2>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="_replyto" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+      </div>
+    </section>
 
   </div>
 
