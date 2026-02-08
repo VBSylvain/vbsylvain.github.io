@@ -25,4 +25,19 @@
     target: '#sideNav'
   });
 
+  // Role filtering
+  $('#btn-all').click(function() {
+    $('.role-po, .role-sm').show();
+  });
+
+  $('#btn-po').click(function() {
+    $('.role-po').show();
+    $('.role-sm').hide();
+  });
+
+  $('#btn-sm').click(function() {
+    $('.role-sm').show();
+    $('.role-po').hide();
+  });
+
 })(jQuery); // End of use strict
