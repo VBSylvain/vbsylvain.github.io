@@ -108,28 +108,53 @@
         <p class="lead mt-5">Depuis 2011 j'accompagne des entreprises de tous secteurs dans leur transformation digitale. En tant que <strong>Senior Project Manager</strong>, <em>SCRUM Master</em>,
           <em>Product Owner</em> ou encore <em>Delivery Manager</em> (en fonction des missions), j'ai pu réaliser les missions suivantes :
         </p>
+        <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+          <label class="btn btn-primary active" id="btn-all">
+            <input type="radio" name="options" autocomplete="off" checked> Tout
+          </label>
+          <label class="btn btn-primary" id="btn-po">
+            <input type="radio" name="options" autocomplete="off"> Product Owner
+          </label>
+          <label class="btn btn-primary" id="btn-sm">
+            <input type="radio" name="options" autocomplete="off"> Scrum Master
+          </label>
+        </div>
+
         <div class="collapse" id="about-collapse">
           <ul class="fa-ul mb-0">
-            <!-- This right here is good for a PO not a Scrum Master -->
-            <!-- TODO : find a way to make this list and maybe the all page to be interactive depending if the visitor clicks on PO ou SM -->
-            <!-- <li>Rédaction de <strong>User Stories</strong></li>-->
-            <!-- <li>Rédaction de cas de tests</li>-->
-            <!-- <li>Réalisation et automatisation de tests fonctionnels</li>-->
-            <!-- <li>Réalisation et suivi de planning projet, budget, <strong>backlog</strong></li>-->
-            <!-- <li>Préparation et réalisation de formation utilisateurs</li>-->
-            <li>
+            <li class="role-po">
+              <i class="far fa-check-circle"></i>
+              Rédaction de <strong>User Stories</strong>
+            </li>
+            <li class="role-po">
+              <i class="far fa-check-circle"></i>
+              Rédaction de cas de tests
+            </li>
+            <li class="role-po">
+              <i class="far fa-check-circle"></i>
+              Réalisation et automatisation de tests fonctionnels
+            </li>
+            <li class="role-po">
+              <i class="far fa-check-circle"></i>
+              Réalisation et suivi de planning projet, budget, <strong>backlog</strong>
+            </li>
+            <li class="role-po">
+              <i class="far fa-check-circle"></i>
+              Préparation et réalisation de formation utilisateurs
+            </li>
+            <li class="role-sm">
               <i class="far fa-check-circle"></i>
               Animation de <abbr title="Sprint Planning/Retro/Review, Backlog Grooming/Refinement et Daily"><em>cérémonies</em> <strong>SCRUM</strong></abbr>
             </li>
-            <li>
+            <li class="role-sm">
               <i class="far fa-check-circle"></i>
               Mise en place du framework <strong>SCRUM</strong> dans différents <em>projets</em> ou <em>organisations</em>
             </li>
-            <li>
+            <li class="role-sm">
               <i class="far fa-check-circle"></i>
               <strong>Formation</strong> de collaborateurs <small>(en interne ou chez des clients)</small> à <em>SCRUM</em>
             </li>
-            <li>
+            <li class="role-sm">
               <i class="far fa-check-circle"></i>
               Animation d'équipes <em>pluridisciplinaire</em> <small>(dév, cdp, commerciaux, markting, DG, etc...)</small> autour de <strong>jeux agiles</strong> et de brainstorming
             </li>
