@@ -1,6 +1,8 @@
 (function($) {
   "use strict"; // Start of use strict
 
+  var navbarCollapse = $('.navbar-collapse');
+
   // Smooth scrolling using jQuery easing
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -17,7 +19,7 @@
 
   // Closes responsive menu when a scroll trigger link is clicked
   $('.js-scroll-trigger').click(function() {
-    $('.navbar-collapse').collapse('hide');
+    navbarCollapse.collapse('hide');
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
