@@ -1,0 +1,4 @@
+## 2025-03-02 - Added Subresource Integrity (SRI) to CDN Assets
+**Vulnerability:** External CSS and JS assets (Bootstrap and jQuery) were loaded from CDNs without integrity checks. This exposed the application to a potential supply chain attack (XSS) if the CDNs were compromised.
+**Learning:** The application relies heavily on standard external libraries served via CDN for styling and interactivity.
+**Prevention:** Always include `integrity` and `crossorigin="anonymous"` attributes when loading resources from external domains to verify the content matches the expected hash and prevent the execution of altered files.
