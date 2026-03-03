@@ -1,0 +1,4 @@
+## 2024-03-03 - Missing SRI on External Dependencies
+**Vulnerability:** External CDN resources (Bootstrap CSS, jQuery JS, and Bootstrap JS) were loaded in `index.html` without Subresource Integrity (SRI) hashes or `crossorigin` attributes.
+**Learning:** This exposes the application to supply chain attacks where a compromised CDN could inject malicious code (like XSS) directly into the user's browser, bypassing the application's origin. Without `crossorigin="anonymous"`, cross-origin resource sharing (CORS) might also prevent proper error reporting or caching for these resources.
+**Prevention:** All external resources loaded via `<script>` or `<link>` tags from CDNs must include an `integrity` attribute (e.g., `sha384-...`) to verify the file content and a `crossorigin="anonymous"` attribute to handle CORS correctly.
