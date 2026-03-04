@@ -1,0 +1,4 @@
+## 2025-03-04 - [Missing Security Attributes on CDN Links & Anchor Tags]
+**Vulnerability:** External CDN resources in `index.html` were lacking Subresource Integrity (SRI) hashes and `crossorigin="anonymous"` attributes, posing a risk of malicious code execution if the CDN were compromised. Additionally, multiple `target="_blank"` anchor tags were missing the `rel="noopener noreferrer"` attribute, introducing a reverse tabnabbing vulnerability.
+**Learning:** These security gaps existed due to incomplete HTML boilerplate or a lack of enforcement during the initial development phase, which relied heavily on external libraries.
+**Prevention:** Ensure all future external CDN links include valid `integrity` (SHA-384) and `crossorigin="anonymous"` attributes. Mandate the use of `rel="noopener noreferrer"` for any `target="_blank"` link to prevent malicious redirection by the opened page.
