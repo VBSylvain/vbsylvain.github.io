@@ -1,0 +1,4 @@
+## 2024-05-24 - Missing Subresource Integrity (SRI) on External CDNs
+**Vulnerability:** External CDNs (Bootstrap, jQuery) in `index.html` lacked `integrity` and `crossorigin="anonymous"` attributes. If the CDN is compromised, malicious scripts could be executed in the user's browser (XSS).
+**Learning:** Static HTML projects relying heavily on third-party CDNs must hash their static external dependencies to ensure integrity. However, dynamically generated endpoints (like Google Fonts) must NOT be hashed, as their contents change dynamically and will break the application if SRI is applied.
+**Prevention:** Always generate SHA-384 hashes for static external scripts/stylesheets during integration and use `crossorigin="anonymous"` to enforce CORS policies.
