@@ -1,0 +1,4 @@
+## 2024-05-24 - Reverse Tabnabbing and Missing Subresource Integrity (SRI)
+**Vulnerability:** External CDN links (`<link>` and `<script>`) lacked Subresource Integrity (SRI) attributes, allowing potential execution of compromised scripts if the CDN were breached. External links opening in new tabs (`target="_blank"`) were missing the `rel="noopener noreferrer"` attribute, leading to a reverse tabnabbing vulnerability where the newly opened page could maliciously manipulate the referring page's `window.opener` object.
+**Learning:** These are common oversights in static HTML sites utilizing Bootstrap and jQuery via external CDNs, especially when developers rely on standard snippets.
+**Prevention:** Always verify external links and scripts for security attributes during code review and implement automated linting checks for SRI and `noopener noreferrer` on `target="_blank"` links.
