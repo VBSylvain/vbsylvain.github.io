@@ -1,0 +1,486 @@
+{
+  "identity": {
+    "first_name": "Sylvain",
+    "last_name": "VIZZINI",
+    "tagline_fr": "Je transforme des équipes en machines à livrer. Depuis 15 ans.",
+    "tagline_en": "Turning teams into delivery engines. For 15 years.",
+    "role_fr": "Scrum Master · Product Manager · Consultant Agile Senior",
+    "role_en": "Scrum Master · Product Manager · Senior Agile Consultant",
+    "location_fr": "Bilieu, Isère — Région Grenoble / Lyon",
+    "location_en": "Bilieu, Isère — Grenoble / Lyon area, France",
+    "availability_fr": "Freelance · Disponible selon projet",
+    "availability_en": "Freelance · Available upon discussion",
+    "contact": {
+      "linkedin_url": null,
+      "malt_url": null
+    }
+  },
+
+  "hero_stats": [
+    {
+      "value": "15+",
+      "label_fr": "ans d'expérience",
+      "label_en": "years of experience"
+    },
+    {
+      "value": "+40%",
+      "label_fr": "de productivité générée",
+      "label_en": "productivity generated"
+    },
+    {
+      "value": "0→30%",
+      "label_fr": "de marge reconstituée en 1 an",
+      "label_en": "margin rebuilt in 1 year"
+    },
+    {
+      "value": "85%",
+      "label_fr": "de temps économisé via IA",
+      "label_en": "time saved with AI"
+    }
+  ],
+
+  "metrics": [
+    {
+      "value": "0→30%",
+      "label_fr": "Marge reconstituée en moins d'un an",
+      "label_en": "Margin rebuilt in under a year",
+      "description_fr": "Transformation d'une équipe en galère vers 30% de marge constante — sans turnover.",
+      "description_en": "Took a struggling dev team to 30% consistent margin — with near-zero turnover.",
+      "source_fr": "Akkodis — Lyon, 2020-2021",
+      "source_en": "Akkodis — Lyon, 2020-2021",
+      "is_overflow": true
+    },
+    {
+      "value": "+40%",
+      "label_fr": "De productivité gagnée",
+      "label_en": "Productivity increase",
+      "description_fr": "Transformation Agile et DevOps de 20+ développeurs — CI/CD, qualité code, métriques temps réel.",
+      "description_en": "Agile and DevOps transformation of 20+ developers — CI/CD, code quality, real-time metrics.",
+      "source_fr": "Akkodis — Lyon, 2020-2022",
+      "source_en": "Akkodis — Lyon, 2020-2022",
+      "is_overflow": false
+    },
+    {
+      "value": "−50%",
+      "label_fr": "De défauts éliminés",
+      "label_en": "Defects eliminated",
+      "description_fr": "Réduction par priorisation rigoureuse et discipline de reporting — résultat en quelques mois.",
+      "description_en": "Defect reduction through disciplined prioritization and reporting rigor — achieved in months.",
+      "source_fr": "Schneider Electric — 2025",
+      "source_en": "Schneider Electric — 2025",
+      "is_overflow": false
+    },
+    {
+      "value": "85%",
+      "label_fr": "De temps de rédaction économisé",
+      "label_en": "Writing time saved",
+      "description_fr": "Compétence IA de rédaction US déployée — throughput augmenté, sujets non-tracés éliminés.",
+      "description_en": "AI User Story writing skill deployed — throughput up, untracked subjects eliminated.",
+      "source_fr": "Schneider Electric — 2026",
+      "source_en": "Schneider Electric — 2026",
+      "is_overflow": false
+    },
+    {
+      "value": "+12%",
+      "label_fr": "De productivité via formation GenAI",
+      "label_en": "Productivity via GenAI training",
+      "description_fr": "Formation 8h sur l'IA générative — équipe production opérationnelle sur les outils IA en une journée.",
+      "description_en": "8-hour GenAI training — production team operational on AI tools in one day.",
+      "source_fr": "BPS — 2024",
+      "source_en": "BPS — 2024",
+      "is_overflow": false
+    },
+    {
+      "value": "80-95%",
+      "label_fr": "De temps admin économisé",
+      "label_en": "Admin time saved",
+      "description_fr": "Système no-code pour 200 élèves — de la feuille papier à l'automatisation complète en 3 jours.",
+      "description_en": "No-code system for 200 students — from paper forms to full automation built in 3 days.",
+      "source_fr": "Garric Danse — 2024-2025",
+      "source_en": "Garric Danse — 2024-2025",
+      "is_overflow": false
+    }
+  ],
+
+  "skills": [
+    {
+      "skill_fr": "Scrum Master & Facilitation Agile",
+      "skill_en": "Scrum Master & Agile Facilitation",
+      "score": 92,
+      "role_tags": ["agile_delivery"],
+      "value_tags": ["team_performance", "transformation"]
+    },
+    {
+      "skill_fr": "Gestion de parties prenantes",
+      "skill_en": "Stakeholder Management",
+      "score": 89,
+      "role_tags": ["coaching_leadership", "strategy_business"],
+      "value_tags": ["culture_change", "transformation"]
+    },
+    {
+      "skill_fr": "Product Management & Roadmapping",
+      "skill_en": "Product Management & Roadmapping",
+      "score": 86,
+      "role_tags": ["product"],
+      "value_tags": ["time_to_market", "transformation"]
+    },
+    {
+      "skill_fr": "Coaching & Leadership d'équipe",
+      "skill_en": "Team Coaching & Leadership",
+      "score": 83,
+      "role_tags": ["coaching_leadership", "pedagogy"],
+      "value_tags": ["team_performance", "culture_change"]
+    },
+    {
+      "skill_fr": "Delivery Management & Transformation",
+      "skill_en": "Delivery Management & Transformation",
+      "score": 81,
+      "role_tags": ["agile_delivery", "strategy_business"],
+      "value_tags": ["transformation", "team_performance"]
+    },
+    {
+      "skill_fr": "Conduite du changement",
+      "skill_en": "Change Management",
+      "score": 79,
+      "role_tags": ["coaching_leadership", "strategy_business"],
+      "value_tags": ["transformation", "culture_change"]
+    },
+    {
+      "skill_fr": "Gestion de projet classique",
+      "skill_en": "Classical Project Management",
+      "score": 77,
+      "role_tags": ["strategy_business"],
+      "value_tags": ["transformation", "time_to_market"]
+    },
+    {
+      "skill_fr": "IA Générative & Pratique AI",
+      "skill_en": "Generative AI & AI Practice",
+      "score": 76,
+      "role_tags": ["ai_automation", "pedagogy"],
+      "value_tags": ["ai_adoption", "time_to_market"]
+    },
+    {
+      "skill_fr": "SAFe / Agilité à l'échelle",
+      "skill_en": "SAFe / Scaled Agile",
+      "score": 72,
+      "role_tags": ["agile_delivery"],
+      "value_tags": ["team_performance", "transformation"]
+    },
+    {
+      "skill_fr": "No-code & Automatisation",
+      "skill_en": "No-code & Workflow Automation",
+      "score": 70,
+      "role_tags": ["ai_automation"],
+      "value_tags": ["cost_reduction", "time_to_market"]
+    }
+  ],
+
+  "experiences": [
+    {
+      "id": "schneider-electric-2025",
+      "type": "professional",
+      "company": "Schneider Electric",
+      "role_fr": "Scrum Master & RTE Assistant",
+      "role_en": "Scrum Master & RTE Assistant",
+      "employment_type": "freelance",
+      "start_date": "2025-01-01",
+      "end_date": null,
+      "current": true,
+      "location_fr": "France / Inde (80/20)",
+      "location_en": "France / India (80/20)",
+      "description_fr": "Scrum Master pour 3 équipes dans un ART SAFe de 80 personnes (IoT industriel). −50% de défauts, adoption IA pilotée à l'échelle du programme, rôle informel de AI Leader validé client. Co-développement d'outils IA internes : 85% de temps de rédaction économisé, PoC Copilot en 2 jours.",
+      "description_en": "Scrum Master across 3 teams in an 80-person SAFe ART (industrial IoT). −50% defects, AI adoption led at program scale, client-validated informal AI Leader. Co-built internal AI tools: 85% writing time saved, Copilot PoC in 2 days.",
+      "tags": ["SAFe", "ART", "Scrum", "IoT", "AI", "GitHub Copilot", "DevSecOps", "CI/CD"],
+      "roles": ["agile_delivery", "ai_automation", "pedagogy"],
+      "values": ["team_performance", "ai_adoption", "transformation"]
+    },
+    {
+      "id": "bps-2023",
+      "type": "professional",
+      "company": "Blockchain Process Security (BPS)",
+      "role_fr": "Senior Product Manager",
+      "role_en": "Senior Product Manager",
+      "employment_type": "freelance",
+      "start_date": "2023-11-01",
+      "end_date": "2024-12-31",
+      "current": false,
+      "location_fr": "Remote",
+      "location_en": "Remote",
+      "description_fr": "Product Manager pour 2 produits DeFi dans une startup de 30 personnes. Coaching du C-Suite, introduction du MVP et de la culture Agile, formation GenAI +12% de productivité. 17+ recrutements conduits.",
+      "description_en": "Product Manager for 2 DeFi products in a 30-person startup. Coached the C-Suite, introduced MVP culture and Agile, GenAI training +12% productivity. Led 17+ recruitment interviews.",
+      "tags": ["Product Management", "DeFi", "GenAI", "Coaching", "Agile", "Startup", "Crypto"],
+      "roles": ["product", "coaching_leadership", "pedagogy"],
+      "values": ["transformation", "ai_adoption", "culture_change", "time_to_market"]
+    },
+    {
+      "id": "akkodis-genai-2023",
+      "type": "professional",
+      "company": "Akkodis",
+      "role_fr": "Formateur GenAI",
+      "role_en": "GenAI Trainer",
+      "employment_type": "employee",
+      "start_date": "2023-09-01",
+      "end_date": "2023-11-30",
+      "current": false,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "Formateur interne en IA générative — curriculum sur mesure, mentorat 1-1 en prompt engineering, focus usages réels pour ingénieurs logiciels.",
+      "description_en": "Internal GenAI trainer — custom curriculum, 1-on-1 prompt engineering mentoring, hands-on focus for software engineers.",
+      "tags": ["GenAI", "Training", "Prompt Engineering", "AI", "ChatGPT", "Claude"],
+      "roles": ["pedagogy", "ai_automation"],
+      "values": ["ai_adoption"]
+    },
+    {
+      "id": "akkodis-dm-2020",
+      "type": "professional",
+      "company": "Akkodis (ex Modis)",
+      "role_fr": "Delivery Manager, Scrum Master & Portfolio Manager",
+      "role_en": "Delivery Manager, Scrum Master & Portfolio Manager",
+      "employment_type": "employee",
+      "start_date": "2020-05-01",
+      "end_date": "2023-11-30",
+      "current": false,
+      "location_fr": "Lyon & Lille",
+      "location_en": "Lyon & Lille, France",
+      "description_fr": "Transformation de 2 équipes dev (20+ personnes, Lyon + Lille) : +40% productivité, marge 0→30% en moins d'un an, turnover ~0%. Agile, CI/CD, Azure DevOps. 20+ appels d'offres. PSM I et PSPO I obtenus.",
+      "description_en": "Transformed 2 dev teams (20+ people, Lyon + Lille): +40% productivity, 0 to 30% margin in under a year, near-zero turnover. Agile, CI/CD, Azure DevOps. 20+ tenders. Earned PSM I and PSPO I.",
+      "tags": ["Delivery Management", "Agile", "Scrum", "CI/CD", "Azure DevOps", "Transformation", "ISO 9001"],
+      "roles": ["agile_delivery", "coaching_leadership", "strategy_business"],
+      "values": ["transformation", "team_performance", "cost_reduction", "culture_change"]
+    },
+    {
+      "id": "modis-pm-2020",
+      "type": "professional",
+      "company": "Modis",
+      "role_fr": "Chef de Projet Senior — Déploiement Global CRM",
+      "role_en": "Senior Project Manager — Global CRM Rollout",
+      "employment_type": "employee",
+      "start_date": "2020-11-01",
+      "end_date": "2021-06-30",
+      "current": false,
+      "location_fr": "Global (20+ pays)",
+      "location_en": "Global (20+ countries)",
+      "description_fr": "Pilotage du déploiement mondial d'un CRM Salesforce sur 20+ pays — planning 9 mois, coordination multi-équipes distante, reporting exécutif (Country Managers, CEO global).",
+      "description_en": "Led global Salesforce CRM rollout across 20+ countries — 9-month plan, remote cross-functional coordination, executive reporting (Country Managers, global CEO).",
+      "tags": ["Project Management", "Salesforce", "CRM", "Global", "Stakeholder Management", "Power BI"],
+      "roles": ["strategy_business"],
+      "values": ["transformation"]
+    },
+    {
+      "id": "ffd-2019",
+      "type": "professional",
+      "company": "Fédération Française de Danse",
+      "role_fr": "Product Owner",
+      "role_en": "Product Owner",
+      "employment_type": "freelance",
+      "start_date": "2019-11-01",
+      "end_date": "2020-04-30",
+      "current": false,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "Product Owner pour un outil de création de contenu pédagogique en ligne, dans une fédération de 2 000+ clubs et 200 000+ membres.",
+      "description_en": "Product Owner for an online educational content creation tool, in a federation of 2,000+ clubs and 200,000+ members.",
+      "tags": ["Product Owner", "Agile", "User Stories", "Education", "PHP", "Testing"],
+      "roles": ["product"],
+      "values": ["time_to_market"]
+    },
+    {
+      "id": "captivea-2017",
+      "type": "professional",
+      "company": "Captivea",
+      "role_fr": "Product Owner, Scrum Master & Ingénieur Pré-vente",
+      "role_en": "Product Owner, Scrum Master & Pre-Sales Engineer",
+      "employment_type": "employee",
+      "start_date": "2017-08-01",
+      "end_date": "2019-11-30",
+      "current": false,
+      "location_fr": "France & Suisse",
+      "location_en": "France & Switzerland",
+      "description_fr": "PO et SM pour 6 développeurs (PHP Symfony, Angular, microservices). Waterfall → Scrum en 12 mois. 10+ clients CRM gérés en parallèle. Évolution vers la pré-vente Odoo.",
+      "description_en": "PO and SM for a 6-developer team (PHP Symfony, Angular, microservices). Waterfall to Scrum in 12 months. 10+ CRM clients managed in parallel. Evolved into Odoo pre-sales engineering.",
+      "tags": ["Scrum", "Product Owner", "CRM", "ERP", "Odoo", "PHP Symfony", "Angular", "CI/CD"],
+      "roles": ["agile_delivery", "product", "strategy_business"],
+      "values": ["transformation", "time_to_market", "team_performance"]
+    },
+    {
+      "id": "adn-2015",
+      "type": "professional",
+      "company": "ADN Alpes Dauphiné Nettoyage",
+      "role_fr": "Responsable SI & Communication Externe",
+      "role_en": "IS & External Communications Manager",
+      "employment_type": "employee",
+      "start_date": "2015-10-01",
+      "end_date": "2017-08-31",
+      "current": false,
+      "location_fr": "Région Rhône-Alpes",
+      "location_en": "Rhône-Alpes region, France",
+      "description_fr": "Modernisation complète du SI (600-800 salariés) — budget 100k€, migration infrastructure, helpdesk, site web. Efficacité générée : poste réduit à 15% de sa charge initiale à la sortie.",
+      "description_en": "Full IS modernization (600-800 employees) — 100k€ budget, infrastructure migration, helpdesk tooling, website. Generated efficiency reduced the role to 15% of its initial workload on exit.",
+      "tags": ["IS Management", "Infrastructure", "Windows Server", "Budget", "WordPress", "Vendor Management"],
+      "roles": ["strategy_business"],
+      "values": ["transformation", "cost_reduction"]
+    },
+    {
+      "id": "ciat-2012",
+      "type": "professional",
+      "company": "CIAT",
+      "role_fr": "Chef de Projet IT",
+      "role_en": "IT Project Manager",
+      "employment_type": "employee",
+      "start_date": "2012-09-01",
+      "end_date": "2014-08-31",
+      "current": false,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "Chef de projet IT : migration cloud Google Apps (2 000 salariés), implémentation ECM, automatisation S&OP avec 90% de temps de traitement économisé.",
+      "description_en": "IT Project Manager: Google Apps cloud migration (2,000 employees), ECM implementation, S&OP automation saving 90% of processing time.",
+      "tags": ["Project Management", "Cloud Migration", "Google Apps", "ECM", "Automation", "Change Management"],
+      "roles": ["strategy_business"],
+      "values": ["transformation", "cost_reduction", "time_to_market"]
+    },
+    {
+      "id": "caterpillar-2011",
+      "type": "professional",
+      "company": "Caterpillar",
+      "role_fr": "Planificateur de Projet",
+      "role_en": "Project Management Scheduler",
+      "employment_type": "employee",
+      "start_date": "2011-10-01",
+      "end_date": "2012-08-31",
+      "current": false,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "Planification du déploiement mondial SAP de Caterpillar (100 000+ employés) — Oracle Primavera, reporting exécutif, collaboration internationale.",
+      "description_en": "Scheduling and coordination on Caterpillar's global SAP ERP rollout (100,000+ employees) — Oracle Primavera, executive reporting, international collaboration.",
+      "tags": ["SAP", "ERP", "Oracle Primavera", "Project Management", "Global", "Scheduling"],
+      "roles": ["strategy_business"],
+      "values": ["transformation"]
+    },
+    {
+      "id": "ai-practice-personal",
+      "type": "extra_pro",
+      "company": null,
+      "role_fr": "Architecte IA & Développeur No-code",
+      "role_en": "AI Architect & No-code Developer",
+      "employment_type": "personal",
+      "start_date": "2023-07-01",
+      "end_date": null,
+      "current": true,
+      "location_fr": "Bilieu, France",
+      "location_en": "Bilieu, France",
+      "description_fr": "Praticien IA quotidien depuis mi-2023 : AIOS autonome 24/7 (Claude Code + Telegram + N8n), pipeline podcast personnalisé automatisé (N8n + Gemini + Google TTS), consulting no-code pour clients (Garric Danse : 200 élèves, −80/95% de temps admin). IA opérationnelle dans 6 domaines de vie — pas juste sur les slides.",
+      "description_en": "Daily AI practitioner since mid-2023: 24/7 autonomous AIOS (Claude Code + Telegram + N8n), automated personalized podcast pipeline (N8n + Gemini + Google TTS), no-code consulting for clients (Garric Danse: 200 students, −80/95% admin time). AI as an operational tool across 6 life domains — not just on slides.",
+      "tags": ["AIOS", "Claude Code", "N8n", "No-code", "Make.com", "Airtable", "Automation", "Self-hosting", "Entrepreneurship"],
+      "roles": ["ai_automation", "product", "pedagogy"],
+      "values": ["ai_adoption", "cost_reduction", "time_to_market"]
+    },
+    {
+      "id": "dance-instructor",
+      "type": "extra_pro",
+      "company": "Garric Danse",
+      "role_fr": "Instructeur de danses de couple",
+      "role_en": "Partner Dance Instructor",
+      "employment_type": "volunteer",
+      "start_date": "2015-01-01",
+      "end_date": null,
+      "current": true,
+      "location_fr": "Voiron, France",
+      "location_en": "Voiron, France",
+      "description_fr": "Instructeur de danses de couple depuis 10 ans — Salsa, Bachata, Rock'n'roll, Lindy Hop, West Coast Swing. Chaque cours est un exercice de pédagogie adaptée, de lecture du groupe et de création d'un espace bienveillant où les gens osent et progressent.",
+      "description_en": "Partner dance instructor for 10+ years — Salsa, Bachata, Rock'n'roll, Lindy Hop, West Coast Swing. Every class is an exercise in adaptive pedagogy, reading the room, and building a safe space where people dare and grow.",
+      "tags": ["Teaching", "Pedagogy", "Facilitation", "Group Dynamics", "Dance"],
+      "roles": ["pedagogy", "coaching_leadership"],
+      "values": ["team_performance", "culture_change"]
+    },
+    {
+      "id": "theater-artist",
+      "type": "extra_pro",
+      "company": null,
+      "role_fr": "Comédien & Improvisateur",
+      "role_en": "Actor & Improv Practitioner",
+      "employment_type": "personal",
+      "start_date": null,
+      "end_date": null,
+      "current": true,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "Comédien et improvisateur — le théâtre a développé ma présence, ma capacité à m'adapter à l'imprévu et à connecter avec n'importe quel groupe. Directement transférable à la facilitation, la formation et la gestion de situation sous pression.",
+      "description_en": "Actor and improv practitioner — theater built my presence, ability to adapt to the unexpected, and to connect with any group. Directly transferable to facilitation, training delivery, and managing high-pressure group dynamics.",
+      "tags": ["Improv", "Theater", "Public Speaking", "Facilitation", "Presence"],
+      "roles": ["coaching_leadership", "pedagogy"],
+      "values": ["culture_change", "team_performance"]
+    },
+    {
+      "id": "poker-player",
+      "type": "extra_pro",
+      "company": null,
+      "role_fr": "Joueur de poker — Tournois & Cash Games",
+      "role_en": "Poker Player — Tournaments & Cash Games",
+      "employment_type": "personal",
+      "start_date": "2011-01-01",
+      "end_date": null,
+      "current": true,
+      "location_fr": "France",
+      "location_en": "France",
+      "description_fr": "15+ ans de tournois et cash games. Le poker forge la prise de décision sous incertitude, la gestion du risque et la lecture comportementale — compétences appliquées au quotidien en gestion de projet, négociation et facilitation.",
+      "description_en": "15+ years of tournaments and cash games. Poker builds decision-making under uncertainty, risk management, and reading people — skills I apply daily in project management, negotiations, and facilitation.",
+      "tags": ["Strategy", "Risk Management", "Decision Making", "Reading People", "Probability"],
+      "roles": ["strategy_business"],
+      "values": ["other"]
+    }
+  ],
+
+  "certifications": [
+    {
+      "name_fr": "Professional Scrum Master I",
+      "name_en": "Professional Scrum Master I",
+      "abbreviation": "PSM I",
+      "organization": "Scrum.org",
+      "year": 2020
+    },
+    {
+      "name_fr": "Professional Scrum Product Owner I",
+      "name_en": "Professional Scrum Product Owner I",
+      "abbreviation": "PSPO I",
+      "organization": "Scrum.org",
+      "year": 2020
+    },
+    {
+      "name_fr": "Six Sigma Yellow Belt",
+      "name_en": "Six Sigma Yellow Belt",
+      "abbreviation": "6σ YB",
+      "organization": "ASQ",
+      "year": 2011
+    },
+    {
+      "name_fr": "Career Essentials in Generative AI",
+      "name_en": "Career Essentials in Generative AI",
+      "abbreviation": null,
+      "organization": "Microsoft & LinkedIn",
+      "year": 2023
+    },
+    {
+      "name_fr": "Certificat — Prompt Engineering",
+      "name_en": "Certificate — Prompt Engineering",
+      "abbreviation": null,
+      "organization": "learnprompting.org",
+      "year": 2023
+    },
+    {
+      "name_fr": "Make.com Foundation",
+      "name_en": "Make.com Foundation",
+      "abbreviation": null,
+      "organization": "Make.com",
+      "year": 2024
+    }
+  ],
+
+  "contact": {
+    "linkedin_url": null,
+    "malt_url": null,
+    "message_fr": "Intéressé(e) par une collaboration ? Retrouvez-moi sur LinkedIn ou Malt.",
+    "message_en": "Interested in working together? Find me on LinkedIn or Malt.",
+    "availability_fr": "Freelance · Disponible selon projet",
+    "availability_en": "Freelance · Available upon discussion"
+  }
+}
