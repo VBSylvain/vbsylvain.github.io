@@ -476,8 +476,8 @@
   ],
 
   "contact": {
-    "linkedin_url": null,
-    "malt_url": null,
+    "linkedin_url": "https://www.linkedin.com/in/vbsylvain",
+    "malt_url": "https://www.malt.fr/profile/sylvainvizzinibruyas",
     "message_fr": "Intéressé(e) par une collaboration ? Retrouvez-moi sur LinkedIn ou Malt.",
     "message_en": "Interested in working together? Find me on LinkedIn or Malt.",
     "availability_fr": "Freelance · Disponible selon projet",
