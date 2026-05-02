@@ -175,7 +175,7 @@ function render() {
 }
 
 function renderHero() {
-    const { identity, hero_stats } = state.data;
+    const { identity, hero_stats, contact } = state.data;
     const lang = state.currentLang;
     document.getElementById('hero-content').innerHTML = `
         <h1 class="hero-name">${identity.first_name} ${identity.last_name}</h1>
@@ -190,8 +190,8 @@ function renderHero() {
             `).join('')}
         </div>
         <div class="hero-actions">
-            <a href="${identity.contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank">LinkedIn</a>
-            <a href="${identity.contact.malt_url || '#'}" class="btn btn-primary" target="_blank">Malt</a>
+            <a href="${contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank">LinkedIn</a>
+            <a href="${contact.malt_url || '#'}" class="btn btn-primary" target="_blank">Malt</a>
         </div>
     `;
 }
