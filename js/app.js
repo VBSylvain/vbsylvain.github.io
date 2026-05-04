@@ -180,7 +180,7 @@ function renderHero() {
     document.getElementById('hero-content').innerHTML = `
         <h1 class="hero-name">${identity.first_name} ${identity.last_name}</h1>
         <p class="hero-role">${identity[`role_${lang}`]}</p>
-        <p class="hero-tagline">${identity[`tagline_${lang}`]}</p>
+        <p class="hero-tagline">${state.currentTheme === '90s' ? `<marquee scrollamount="12">${identity[`tagline_${lang}`]}</marquee>` : identity[`tagline_${lang}`]}</p>
         <div class="hero-stats">
             ${hero_stats.map(stat => `
                 <div class="stat-item tilt-card">
