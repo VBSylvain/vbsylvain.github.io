@@ -71,6 +71,21 @@ function setupGodTierEffects() {
     
     if (!cursor || !dot) return;
 
+    let tiltCache = [];
+    const updateCache = () => {
+        const isPortfolioVisible = !document.getElementById('portfolio-container').classList.contains('hidden');
+        if (!isPortfolioVisible) {
+            tiltCache = [];
+            return;
+        }
+        tiltCache = Array.from(document.querySelectorAll('.tilt-card')).map(card => {
+            const rect = card.getBoundingClientRect();
+            return { card, cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2 };
+        });
+    };
+    window.addEventListener('resize', updateCache, { passive: true });
+    window.addEventListener('scroll', updateCache, { passive: true });
+
     window.addEventListener('mousemove', (e) => {
         const { clientX: x, clientY: y } = e;
         dot.style.left = `${x}px`;
@@ -83,12 +98,12 @@ function setupGodTierEffects() {
 
         const isPortfolioVisible = !document.getElementById('portfolio-container').classList.contains('hidden');
         if (isPortfolioVisible) {
-            document.querySelectorAll('.tilt-card').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const cardX = rect.left + rect.width / 2;
-                const cardY = rect.top + rect.height / 2;
-                const angleX = (y - cardY) / (window.innerHeight / 2) * 10;
-                const angleY = (x - cardX) / (window.innerWidth / 2) * -10; 
+            if (tiltCache.length === 0 || (tiltCache[0] && !tiltCache[0].card.isConnected)) {
+                updateCache();
+            }
+            tiltCache.forEach(({ card, cx, cy }) => {
+                const angleX = (y - cy) / (window.innerHeight / 2) * 10;
+                const angleY = (x - cx) / (window.innerWidth / 2) * -10;
                 card.style.setProperty('--rx', `${angleX}deg`);
                 card.style.setProperty('--ry', `${angleY}deg`);
             });
