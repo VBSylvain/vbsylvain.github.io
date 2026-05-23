@@ -1,0 +1,994 @@
+/* --- Pizzeria Napoletana Menu Theme --- */
+
+.pizzeria-book-controls {
+    display: none;
+}
+
+@keyframes pizzeriaPaperIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px) rotateX(3deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+@keyframes menuReveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes sauceUnderline {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes pageTurnForward {
+    from {
+        opacity: 0;
+        transform: perspective(1400px) rotateY(-12deg) translateX(26px);
+        filter: brightness(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1400px) rotateY(0deg) translateX(0);
+        filter: brightness(1);
+    }
+}
+
+@keyframes pageTurnBack {
+    from {
+        opacity: 0;
+        transform: perspective(1400px) rotateY(12deg) translateX(-26px);
+        filter: brightness(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1400px) rotateY(0deg) translateX(0);
+        filter: brightness(1);
+    }
+}
+
+@keyframes pageShadowSweep {
+    from {
+        opacity: 0.55;
+        transform: translateX(-42%);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(42%);
+    }
+}
+
+@keyframes ovenGlow {
+    0%, 100% { box-shadow: 0 8px 28px rgba(107, 29, 27, 0.14); }
+    50% { box-shadow: 0 12px 38px rgba(180, 64, 41, 0.26); }
+}
+
+@keyframes inkBloom {
+    from { background-size: 0 2px; }
+    to { background-size: 100% 2px; }
+}
+
+body.theme-pizzeria {
+    --pizzeria-ink: #2f241c;
+    --pizzeria-muted: #7c6755;
+    --pizzeria-paper: #f8efd9;
+    --pizzeria-paper-deep: #ead8b4;
+    --pizzeria-red: #9d2f28;
+    --pizzeria-green: #315b3c;
+    --pizzeria-gold: #b3833c;
+    --pizzeria-border: rgba(83, 54, 32, 0.28);
+    --pizzeria-shadow: 0 24px 70px rgba(62, 35, 20, 0.26);
+    --primary: #332116;
+    --accent: var(--pizzeria-red);
+    --accent-secondary: var(--pizzeria-green);
+    --accent-glow: rgba(157, 47, 40, 0.25);
+    --bg-card: rgba(255, 248, 231, 0.86);
+    --text-main: var(--pizzeria-ink);
+    --text-muted: var(--pizzeria-muted);
+    --border: var(--pizzeria-border);
+    --shadow: var(--pizzeria-shadow);
+    background-color: #6f2f22;
+    background-image:
+        radial-gradient(circle at 18% 10%, rgba(255, 225, 168, 0.34), transparent 28rem),
+        radial-gradient(circle at 82% 0%, rgba(49, 91, 60, 0.22), transparent 24rem),
+        linear-gradient(120deg, rgba(122, 42, 32, 0.96), rgba(70, 37, 24, 0.98));
+    color: var(--pizzeria-ink);
+    font-family: "Libre Baskerville", Georgia, serif;
+}
+
+body.theme-pizzeria,
+body.theme-pizzeria * {
+    cursor: auto !important;
+}
+
+body.theme-pizzeria .custom-cursor,
+body.theme-pizzeria .cursor-dot {
+    display: none !important;
+}
+
+body.theme-pizzeria::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 38px),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 34px);
+    mix-blend-mode: soft-light;
+}
+
+body.theme-pizzeria .noise-overlay {
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+}
+
+body.theme-pizzeria .landing-screen {
+    background:
+        radial-gradient(circle at 50% 25%, rgba(248, 239, 217, 0.12), transparent 28rem),
+        linear-gradient(135deg, #5a251d, #2d1c14);
+}
+
+body.theme-pizzeria .landing-content h1 {
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    background: linear-gradient(to bottom, #fff4d5, #c89a4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.theme-pizzeria .landing-subtitle {
+    color: #f1d8aa;
+}
+
+.theme-btn[data-theme="pizzeria"] {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(248, 239, 217, 0.9), rgba(232, 211, 169, 0.92)),
+        repeating-linear-gradient(45deg, rgba(83, 54, 32, 0.08) 0 1px, transparent 1px 9px);
+    border: 2px solid rgba(179, 131, 60, 0.78);
+    color: #5a251d;
+    border-radius: 8px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.35rem;
+    box-shadow: 0 16px 40px rgba(30, 18, 11, 0.25);
+}
+
+.theme-btn[data-theme="pizzeria"]::before,
+.theme-btn[data-theme="pizzeria"]::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    height: 1px;
+    background: rgba(157, 47, 40, 0.55);
+}
+
+.theme-btn[data-theme="pizzeria"]::before { top: 34px; }
+.theme-btn[data-theme="pizzeria"]::after { bottom: 34px; }
+
+.theme-btn[data-theme="pizzeria"] .badge {
+    background: #315b3c;
+    color: #fff7df;
+    border-radius: 999px;
+    font-family: Inter, sans-serif;
+    letter-spacing: 0.08em;
+}
+
+body.theme-pizzeria .portfolio-container {
+    animation: pizzeriaPaperIn 0.9s ease both;
+}
+
+body.theme-pizzeria .reveal {
+    animation: menuReveal 0.85s ease both;
+}
+
+body.theme-pizzeria .tilt-card {
+    transform: none !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, translate 0.25s ease, background 0.25s ease;
+}
+
+body.theme-pizzeria .container {
+    max-width: 1060px;
+}
+
+body.theme-pizzeria .main-header {
+    background:
+        linear-gradient(rgba(248, 239, 217, 0.94), rgba(236, 220, 185, 0.94)),
+        repeating-linear-gradient(90deg, rgba(83, 54, 32, 0.07) 0 1px, transparent 1px 14px);
+    border-bottom: 1px solid rgba(83, 54, 32, 0.24);
+    box-shadow: 0 8px 24px rgba(64, 35, 18, 0.12);
+    backdrop-filter: blur(14px);
+}
+
+body.theme-pizzeria .logo {
+    color: var(--pizzeria-red);
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+}
+
+body.theme-pizzeria .logo::after {
+    content: " Pizzeria CV";
+    color: var(--pizzeria-muted);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+body.theme-pizzeria .header-btn,
+body.theme-pizzeria .btn,
+body.theme-pizzeria .filter-btn {
+    border: 1px solid rgba(83, 54, 32, 0.34);
+    border-radius: 999px;
+    background: #fff6df;
+    color: var(--pizzeria-red);
+    font-family: Inter, sans-serif;
+    letter-spacing: 0.05em;
+    box-shadow: 0 8px 18px rgba(71, 43, 24, 0.1);
+}
+
+body.theme-pizzeria .header-btn:hover,
+body.theme-pizzeria .btn:hover,
+body.theme-pizzeria .filter-btn:hover:not(.disabled) {
+    background: var(--pizzeria-red);
+    border-color: var(--pizzeria-red);
+    color: #fff6df;
+    transform: translateY(-3px);
+}
+
+body.theme-pizzeria .btn,
+body.theme-pizzeria .header-btn,
+body.theme-pizzeria .filter-btn,
+body.theme-pizzeria .result-card,
+body.theme-pizzeria .stat-item,
+body.theme-pizzeria .timeline-content,
+body.theme-pizzeria .cert-card {
+    position: relative;
+}
+
+body.theme-pizzeria .btn::after,
+body.theme-pizzeria .header-btn::after,
+body.theme-pizzeria .filter-btn::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: 0.45rem;
+    height: 2px;
+    background: var(--pizzeria-gold);
+    transform: scaleX(0);
+    transform-origin: center;
+}
+
+body.theme-pizzeria .btn:hover::after,
+body.theme-pizzeria .header-btn:hover::after,
+body.theme-pizzeria .filter-btn:hover:not(.disabled)::after {
+    animation: sauceUnderline 0.25s ease forwards;
+}
+
+body.theme-pizzeria main {
+    max-width: 1120px;
+    margin: 3rem auto;
+    min-height: calc(100vh - 9rem);
+    background:
+        linear-gradient(rgba(248, 239, 217, 0.96), rgba(242, 226, 190, 0.96)),
+        repeating-linear-gradient(0deg, rgba(83, 54, 32, 0.035) 0 1px, transparent 1px 24px);
+    border: 1px solid rgba(83, 54, 32, 0.32);
+    border-radius: 10px;
+    box-shadow: var(--pizzeria-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+body.theme-pizzeria main::before,
+body.theme-pizzeria main::after {
+    content: "";
+    position: absolute;
+    inset: 1.1rem;
+    border: 1px solid rgba(157, 47, 40, 0.32);
+    pointer-events: none;
+}
+
+body.theme-pizzeria main::after {
+    inset: 1.45rem;
+    border-color: rgba(49, 91, 60, 0.28);
+}
+
+body.theme-pizzeria.pizzeria-paged main {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    transform-style: preserve-3d;
+}
+
+body.theme-pizzeria .pizzeria-book-controls {
+    display: none;
+}
+
+body.theme-pizzeria.pizzeria-paged .pizzeria-book-controls {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+    align-items: center;
+    gap: 1rem;
+    width: min(1040px, calc(100% - 2rem));
+    margin: 1rem auto 0;
+    padding: 1rem 1.1rem;
+    position: sticky;
+    top: 5.35rem;
+    z-index: 3000;
+    background:
+        linear-gradient(rgba(255, 248, 231, 0.96), rgba(238, 219, 181, 0.96)),
+        repeating-linear-gradient(90deg, rgba(83, 54, 32, 0.055) 0 1px, transparent 1px 16px);
+    border: 1px solid rgba(83, 54, 32, 0.28);
+    border-radius: 999px;
+    box-shadow: 0 14px 38px rgba(55, 31, 17, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+body.theme-pizzeria .pizzeria-page-btn,
+body.theme-pizzeria .pizzeria-page-tab {
+    border: 1px solid rgba(83, 54, 32, 0.3);
+    background: rgba(255, 246, 223, 0.9);
+    color: var(--pizzeria-ink);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+body.theme-pizzeria .pizzeria-page-btn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+body.theme-pizzeria .pizzeria-page-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+body.theme-pizzeria .pizzeria-page-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+body.theme-pizzeria .pizzeria-page-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    border-radius: 999px;
+    padding: 0.58rem 0.8rem;
+    font-family: Inter, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+body.theme-pizzeria .pizzeria-page-tab span {
+    color: var(--pizzeria-gold);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 0.72rem;
+}
+
+body.theme-pizzeria .pizzeria-page-btn:hover,
+body.theme-pizzeria .pizzeria-page-tab:hover,
+body.theme-pizzeria .pizzeria-page-tab.active {
+    background: var(--pizzeria-red);
+    border-color: var(--pizzeria-red);
+    color: #fff7df;
+    transform: translateY(-2px);
+}
+
+body.theme-pizzeria .pizzeria-page-tab.active span {
+    color: #f8d38d;
+}
+
+body.theme-pizzeria section {
+    padding: 5.5rem 0;
+    position: relative;
+}
+
+body.theme-pizzeria.pizzeria-paged section {
+    display: none;
+    min-height: calc(100vh - 19rem);
+    padding: 4.2rem 0 5rem;
+    transform-origin: left center;
+    will-change: transform, opacity;
+}
+
+body.theme-pizzeria.pizzeria-paged section.pizzeria-page-active {
+    display: flex;
+    align-items: center;
+}
+
+body.theme-pizzeria.pizzeria-paged section.pizzeria-page-active > .container {
+    width: 100%;
+}
+
+body.theme-pizzeria.pizzeria-turn-forward section.pizzeria-page-active {
+    animation: pageTurnForward 0.72s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+body.theme-pizzeria.pizzeria-turn-back section.pizzeria-page-active {
+    animation: pageTurnBack 0.72s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+body.theme-pizzeria.pizzeria-paged section.pizzeria-page-active::after {
+    content: "";
+    position: absolute;
+    inset: 2.2rem 1.8rem;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(62, 35, 20, 0.12), transparent);
+    animation: pageShadowSweep 0.72s ease both;
+    mix-blend-mode: multiply;
+}
+
+body.theme-pizzeria .hero-section {
+    padding: 7rem 0 5rem;
+    border-bottom: 1px solid rgba(83, 54, 32, 0.18);
+    overflow: hidden;
+}
+
+body.theme-pizzeria.pizzeria-paged .hero-section {
+    border-bottom: 0;
+}
+
+body.theme-pizzeria .hero-section::before {
+    content: "Pizzeria Napoletana";
+    display: block;
+    color: var(--pizzeria-gold);
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2rem, 5.2vw, 4.7rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    margin: 0 auto 1.4rem;
+    max-width: calc(100% - 4rem);
+    padding-inline: 1rem;
+    text-align: center;
+}
+
+body.theme-pizzeria h1,
+body.theme-pizzeria h2,
+body.theme-pizzeria h3 {
+    color: var(--pizzeria-ink);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    letter-spacing: 0;
+}
+
+body.theme-pizzeria .hero-name {
+    color: var(--pizzeria-red);
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(3.4rem, 9vw, 7rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 0.86;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+}
+
+body.theme-pizzeria .hero-role {
+    color: var(--pizzeria-green);
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.6rem;
+}
+
+body.theme-pizzeria .hero-tagline {
+    color: var(--pizzeria-muted);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3.2rem;
+}
+
+body.theme-pizzeria .hero-stats {
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+body.theme-pizzeria .stat-item,
+body.theme-pizzeria .result-card,
+body.theme-pizzeria .timeline-content,
+body.theme-pizzeria .cert-card,
+body.theme-pizzeria .contact-card {
+    background:
+        linear-gradient(145deg, rgba(255, 250, 235, 0.94), rgba(241, 224, 188, 0.88));
+    border: 1px solid rgba(83, 54, 32, 0.24);
+    border-radius: 8px;
+    box-shadow: 0 14px 35px rgba(69, 39, 20, 0.12);
+    backdrop-filter: none;
+}
+
+body.theme-pizzeria .stat-item {
+    padding: 2.15rem 1.25rem;
+    animation: ovenGlow 4.8s ease-in-out infinite;
+}
+
+body.theme-pizzeria .stat-item:hover,
+body.theme-pizzeria .result-card:hover,
+body.theme-pizzeria .cert-card:hover {
+    border-color: rgba(157, 47, 40, 0.42);
+    box-shadow: 0 18px 45px rgba(69, 39, 20, 0.18);
+    translate: 0 -4px;
+}
+
+body.theme-pizzeria .stat-item::before,
+body.theme-pizzeria .cert-card::before {
+    content: "";
+    position: absolute;
+    inset: 0.65rem;
+    border: 1px solid rgba(179, 131, 60, 0.22);
+    pointer-events: none;
+}
+
+body.theme-pizzeria .stat-value,
+body.theme-pizzeria .result-value {
+    color: var(--pizzeria-red);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    text-shadow: none;
+}
+
+body.theme-pizzeria .stat-label {
+    color: var(--pizzeria-muted);
+    font-family: Inter, sans-serif;
+}
+
+body.theme-pizzeria .section-title {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    color: var(--pizzeria-red);
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: clamp(2.3rem, 5vw, 4.4rem);
+    margin-bottom: 3.5rem;
+    text-align: left;
+}
+
+body.theme-pizzeria .section-title::before,
+body.theme-pizzeria .section-title::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    min-width: 2rem;
+    background: linear-gradient(90deg, transparent, rgba(157, 47, 40, 0.42), transparent);
+}
+
+body.theme-pizzeria .results-grid,
+body.theme-pizzeria .certs-grid {
+    gap: 1.35rem;
+}
+
+body.theme-pizzeria .result-card {
+    padding: 2.4rem 2rem;
+    position: relative;
+}
+
+body.theme-pizzeria .result-card::after {
+    content: "Fatto bene";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 1px solid rgba(157, 47, 40, 0.45);
+    border-radius: 999px;
+    color: rgba(157, 47, 40, 0.72);
+    font-family: Inter, sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    padding: 0.25rem 0.55rem;
+    text-transform: uppercase;
+    transform: rotate(4deg);
+}
+
+body.theme-pizzeria .result-card:hover::after {
+    background: rgba(157, 47, 40, 0.08);
+    transform: rotate(0deg) scale(1.04);
+}
+
+body.theme-pizzeria .result-label {
+    color: var(--pizzeria-ink);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+}
+
+body.theme-pizzeria .result-description,
+body.theme-pizzeria .experience-desc,
+body.theme-pizzeria .contact-msg {
+    color: var(--pizzeria-muted);
+}
+
+body.theme-pizzeria .result-description {
+    position: relative;
+    padding-bottom: 1.25rem;
+}
+
+body.theme-pizzeria .result-description::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-image: linear-gradient(90deg, rgba(83, 54, 32, 0.22) 35%, transparent 0);
+    background-size: 9px 1px;
+}
+
+body.theme-pizzeria .result-source,
+body.theme-pizzeria .experience-company,
+body.theme-pizzeria .cert-year {
+    color: var(--pizzeria-green);
+    font-family: Inter, sans-serif;
+}
+
+body.theme-pizzeria .skills-list {
+    gap: 1.65rem 3rem;
+}
+
+body.theme-pizzeria .skill-info {
+    color: var(--pizzeria-ink);
+    font-family: Inter, sans-serif;
+}
+
+body.theme-pizzeria .skill-bar-bg {
+    height: 8px;
+    background: rgba(83, 54, 32, 0.12);
+    border-color: rgba(83, 54, 32, 0.16);
+}
+
+body.theme-pizzeria .skill-bar-fill {
+    background: linear-gradient(90deg, var(--pizzeria-green), var(--pizzeria-gold), var(--pizzeria-red));
+    box-shadow: none;
+}
+
+body.theme-pizzeria .filter-btn.active {
+    background: var(--pizzeria-green);
+    border-color: var(--pizzeria-green);
+    color: #fff8e6;
+    box-shadow: 0 12px 24px rgba(49, 91, 60, 0.18);
+}
+
+body.theme-pizzeria .filter-btn.disabled {
+    opacity: 0.48;
+}
+
+body.theme-pizzeria .timeline-container {
+    display: block;
+    max-width: 960px;
+    padding-left: 0;
+    margin-inline: auto;
+    background:
+        linear-gradient(145deg, rgba(255, 250, 235, 0.96), rgba(241, 224, 188, 0.9)),
+        repeating-linear-gradient(0deg, rgba(83, 54, 32, 0.03) 0 1px, transparent 1px 22px);
+    border: 1px solid rgba(83, 54, 32, 0.24);
+    border-radius: 8px;
+    box-shadow: 0 18px 48px rgba(69, 39, 20, 0.14);
+    padding: 2.2rem 2.6rem;
+    position: relative;
+}
+
+body.theme-pizzeria .timeline-container::before {
+    content: "Menu degustazione";
+    display: block;
+    position: static;
+    width: auto;
+    height: auto;
+    margin-bottom: 2rem;
+    background: none;
+    color: var(--pizzeria-gold);
+    font-family: "Italiana", "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+}
+
+body.theme-pizzeria .timeline-container::after {
+    content: "";
+    position: absolute;
+    inset: 0.85rem;
+    border: 1px solid rgba(157, 47, 40, 0.22);
+    pointer-events: none;
+}
+
+body.theme-pizzeria .timeline-item {
+    margin-bottom: 0;
+    perspective: none;
+    position: relative;
+    opacity: 1;
+    transform: none;
+}
+
+body.theme-pizzeria .timeline-item + .timeline-item {
+    border-top: 1px solid rgba(83, 54, 32, 0.14);
+}
+
+body.theme-pizzeria .timeline-dot {
+    display: none;
+}
+
+body.theme-pizzeria .timeline-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 0.45rem 1.5rem;
+    padding: 1.55rem 0;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    rotate: 0deg !important;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+body.theme-pizzeria #timeline .timeline-item.reveal,
+body.theme-pizzeria #timeline .timeline-content.reveal {
+    animation: none !important;
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+}
+
+body.theme-pizzeria .timeline-content::after {
+    display: none;
+}
+
+body.theme-pizzeria .timeline-content::before {
+    display: none;
+}
+
+body.theme-pizzeria .timeline-content:hover {
+    box-shadow: none;
+    transform: translateX(4px);
+}
+
+body.theme-pizzeria .experience-role {
+    color: var(--pizzeria-ink);
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    grid-column: 1;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 0;
+}
+
+body.theme-pizzeria .experience-role::after {
+    content: "";
+    display: block;
+    flex: 1;
+    min-width: 2rem;
+    height: 1px;
+    background-image: linear-gradient(90deg, rgba(83, 54, 32, 0.26) 40%, transparent 0);
+    background-size: 8px 1px;
+}
+
+body.theme-pizzeria .experience-meta,
+body.theme-pizzeria .cert-org {
+    color: var(--pizzeria-muted);
+}
+
+body.theme-pizzeria .experience-company {
+    grid-column: 1 / -1;
+    letter-spacing: 0.1em;
+    padding-left: 0;
+    margin-bottom: 0.15rem;
+    font-size: 0.72rem;
+}
+
+body.theme-pizzeria .experience-meta {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: baseline;
+    justify-self: end;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--pizzeria-red);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin-bottom: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+body.theme-pizzeria .experience-desc {
+    grid-column: 1 / -1;
+    max-width: 78ch;
+    padding-top: 0.35rem;
+    font-size: 0.94rem;
+    line-height: 1.75;
+}
+
+body.theme-pizzeria .tag-list {
+    grid-column: 1 / -1;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+}
+
+body.theme-pizzeria .tag {
+    background: transparent;
+    border-color: rgba(49, 91, 60, 0.2);
+    border-radius: 999px;
+    color: var(--pizzeria-green);
+    font-family: Inter, sans-serif;
+    font-size: 0.66rem;
+    padding: 0.34rem 0.68rem;
+}
+
+body.theme-pizzeria .cert-card {
+    padding: 2rem;
+}
+
+body.theme-pizzeria .cert-name {
+    color: var(--pizzeria-ink);
+}
+
+body.theme-pizzeria .contact-card {
+    padding: 5rem 3rem;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(179, 131, 60, 0.16), transparent 18rem),
+        linear-gradient(145deg, rgba(255, 250, 235, 0.96), rgba(235, 215, 176, 0.9));
+}
+
+body.theme-pizzeria .contact-card h2 {
+    color: var(--pizzeria-red);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+}
+
+body.theme-pizzeria .main-footer {
+    color: #f4dfb6;
+    opacity: 0.88;
+}
+
+body.theme-pizzeria .main-footer .container {
+    border-top: 1px solid rgba(248, 239, 217, 0.22);
+    padding-top: 2rem;
+}
+
+body.theme-pizzeria .ai-credit {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: #d6ad65;
+}
+
+body.theme-pizzeria .living-border::before {
+    display: none;
+}
+
+body.theme-pizzeria .tilt-card:hover h3,
+body.theme-pizzeria .result-card:hover .result-label,
+body.theme-pizzeria .cert-card:hover .cert-name {
+    background-image: linear-gradient(var(--pizzeria-red), var(--pizzeria-red));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    animation: inkBloom 0.45s ease forwards;
+}
+
+body.theme-pizzeria .reveal .metallic-icon {
+    animation: none;
+    filter: sepia(1) saturate(0.8) hue-rotate(342deg) brightness(0.9);
+}
+
+@media (max-width: 768px) {
+    body.theme-pizzeria main {
+        margin: 1rem 0.75rem;
+        min-height: calc(100vh - 2rem);
+    }
+
+    body.theme-pizzeria main::before {
+        inset: 0.65rem;
+    }
+
+    body.theme-pizzeria main::after {
+        inset: 0.95rem;
+    }
+
+    body.theme-pizzeria section {
+        padding: 4rem 0;
+    }
+
+    body.theme-pizzeria.pizzeria-paged .pizzeria-book-controls {
+        grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+        gap: 0.55rem;
+        width: calc(100% - 1rem);
+        top: 4.5rem;
+        margin-top: 0.75rem;
+        padding: 0.65rem 0.7rem;
+        border-radius: 20px;
+    }
+
+    body.theme-pizzeria .pizzeria-page-btn {
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+
+    body.theme-pizzeria .pizzeria-page-tabs {
+        justify-content: flex-start;
+        padding: 0.2rem 0 0.45rem;
+    }
+
+    body.theme-pizzeria .pizzeria-page-tab {
+        padding: 0.52rem 0.7rem;
+    }
+
+    body.theme-pizzeria.pizzeria-paged section {
+        min-height: calc(100vh - 10rem);
+        padding: 3.2rem 0 4rem;
+    }
+
+    body.theme-pizzeria .hero-section {
+        padding-top: 5.5rem;
+    }
+
+    body.theme-pizzeria .section-title {
+        display: block;
+        text-align: center;
+    }
+
+    body.theme-pizzeria .section-title::before,
+    body.theme-pizzeria .section-title::after {
+        display: none;
+    }
+
+    body.theme-pizzeria .timeline-content {
+        grid-template-columns: 1fr;
+        padding: 1.35rem 0;
+    }
+
+    body.theme-pizzeria .experience-meta {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: start;
+        white-space: normal;
+        font-size: 1rem;
+    }
+
+    body.theme-pizzeria .experience-role::after {
+        display: none;
+    }
+
+    body.theme-pizzeria .timeline-container {
+        padding: 1.8rem 1.35rem;
+    }
+
+    body.theme-pizzeria .timeline-container::before {
+        margin-bottom: 1.2rem;
+    }
+
+    body.theme-pizzeria .contact-card {
+        padding: 3.5rem 1.5rem;
+    }
+}
