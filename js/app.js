@@ -6,7 +6,17 @@ const state = {
     data: null,
     currentLang: localStorage.getItem('portfolio-lang') || 'fr',
     currentTheme: localStorage.getItem('portfolio-theme') || 'standard',
+    pizzeriaPage: 0,
 };
+
+const pizzeriaPages = [
+    { id: 'hero', label_fr: 'Accueil', label_en: 'Cover' },
+    { id: 'results', label_fr: 'Resultats', label_en: 'Results' },
+    { id: 'skills', label_fr: 'Competences', label_en: 'Skills' },
+    { id: 'timeline', label_fr: 'Parcours', label_en: 'Experience' },
+    { id: 'certifications', label_fr: 'Certifications', label_en: 'Certifications' },
+    { id: 'contact', label_fr: 'Contact', label_en: 'Contact' },
+];
 
 const translations = {
     fr: {
@@ -18,7 +28,7 @@ const translations = {
         footer_rights: "Tous droits réservés.",
         contact_title: "✉️ Contact",
         btn_themes: "Thèmes",
-        footer_ai: "✨ Co-créé avec l'IA (Gemini & Claude)",
+        footer_ai: "✨ Co-créé avec l'IA (Gemini, Claude & Codex)",
     },
     en: {
         results_title: "🚀 Results & Impact",
@@ -29,7 +39,7 @@ const translations = {
         footer_rights: "All rights reserved.",
         contact_title: "✉️ Contact",
         btn_themes: "Themes",
-        footer_ai: "✨ Co-created with AI (Gemini & Claude)",
+        footer_ai: "✨ Co-created with AI (Gemini, Claude & Codex)",
     }
 };
 
@@ -117,6 +127,14 @@ function showLanding() {
     document.getElementById('landing-screen').classList.remove('hidden');
 }
 
+function setPizzeriaPage(index, direction = 'forward') {
+    const pageCount = pizzeriaPages.length;
+    state.pizzeriaPage = (index + pageCount) % pageCount;
+    document.body.classList.toggle('pizzeria-turn-back', direction === 'back');
+    document.body.classList.toggle('pizzeria-turn-forward', direction !== 'back');
+    updatePizzeriaMenu();
+}
+
 function setupEventListeners() {
     document.getElementById('theme-switch-btn').addEventListener('click', showLanding);
     document.querySelectorAll('.theme-btn').forEach(btn => {
@@ -140,6 +158,9 @@ function setupEventListeners() {
 function applyState() {
     document.documentElement.lang = state.currentLang;
     document.body.className = `theme-${state.currentTheme}`;
+    if (state.currentTheme === 'pizzeria') {
+        document.body.classList.add('pizzeria-paged', 'pizzeria-turn-forward');
+    }
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         if (translations[state.currentLang][key]) {
@@ -160,7 +181,10 @@ function setupScrollReveal() {
             }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('section, .result-card, .timeline-item, .stat-item, .cert-card').forEach(el => observer.observe(el));
+    const revealSelector = state.currentTheme === 'pizzeria'
+        ? 'section, .result-card, .stat-item, .cert-card'
+        : 'section, .result-card, .timeline-item, .stat-item, .cert-card';
+    document.querySelectorAll(revealSelector).forEach(el => observer.observe(el));
 }
 
 function render() {
@@ -171,7 +195,63 @@ function render() {
     renderTimeline();
     renderCertifications();
     renderContact();
+    setupPizzeriaMenu();
     setupScrollReveal();
+}
+
+function setupPizzeriaMenu() {
+    const header = document.querySelector('.main-header');
+    if (!header) return;
+
+    let controls = document.getElementById('pizzeria-book-controls');
+    if (!controls) {
+        controls = document.createElement('nav');
+        controls.id = 'pizzeria-book-controls';
+        controls.className = 'pizzeria-book-controls';
+        controls.innerHTML = `
+            <button class="pizzeria-page-btn pizzeria-prev" type="button" aria-label="Previous page">‹</button>
+            <div class="pizzeria-page-tabs"></div>
+            <button class="pizzeria-page-btn pizzeria-next" type="button" aria-label="Next page">›</button>
+        `;
+        header.after(controls);
+        controls.querySelector('.pizzeria-prev').addEventListener('click', () => setPizzeriaPage(state.pizzeriaPage - 1, 'back'));
+        controls.querySelector('.pizzeria-next').addEventListener('click', () => setPizzeriaPage(state.pizzeriaPage + 1, 'forward'));
+    } else if (controls.previousElementSibling !== header) {
+        header.after(controls);
+    }
+
+    const tabs = controls.querySelector('.pizzeria-page-tabs');
+    tabs.innerHTML = pizzeriaPages.map((page, index) => `
+        <button class="pizzeria-page-tab" type="button" data-page-index="${index}">
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            ${page[`label_${state.currentLang}`]}
+        </button>
+    `).join('');
+    tabs.querySelectorAll('.pizzeria-page-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const nextPage = Number(tab.dataset.pageIndex);
+            setPizzeriaPage(nextPage, nextPage < state.pizzeriaPage ? 'back' : 'forward');
+        });
+    });
+
+    updatePizzeriaMenu();
+}
+
+function updatePizzeriaMenu() {
+    pizzeriaPages.forEach((page, index) => {
+        const section = document.getElementById(page.id);
+        if (!section) return;
+        section.classList.toggle('pizzeria-page-active', index === state.pizzeriaPage);
+        section.setAttribute('aria-hidden', state.currentTheme === 'pizzeria' && index !== state.pizzeriaPage ? 'true' : 'false');
+    });
+
+    const controls = document.getElementById('pizzeria-book-controls');
+    if (!controls) return;
+    controls.querySelectorAll('.pizzeria-page-tab').forEach((tab, index) => {
+        tab.classList.toggle('active', index === state.pizzeriaPage);
+    });
+    const current = pizzeriaPages[state.pizzeriaPage];
+    controls.style.setProperty('--page-label', `"${current[`label_${state.currentLang}`]}"`);
 }
 
 function renderHero() {
