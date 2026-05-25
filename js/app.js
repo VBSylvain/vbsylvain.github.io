@@ -270,8 +270,9 @@ function renderHero() {
             `).join('')}
         </div>
         <div class="hero-actions">
-            <a href="${contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank">LinkedIn</a>
-            <a href="${contact.malt_url || '#'}" class="btn btn-primary" target="_blank">Malt</a>
+            <!-- Security: added rel="noopener noreferrer" to prevent reverse tabnabbing -->
+            <a href="${contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="${contact.malt_url || '#'}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Malt</a>
         </div>
     `;
 }
@@ -337,8 +338,9 @@ function renderContact() {
         <h2 data-i18n="contact_title">${translations[lang].contact_title}</h2>
         <p class="contact-msg">${contact[`message_${lang}`]}</p>
         <div class="hero-actions">
-            <a href="${contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank">LinkedIn</a>
-            <a href="${contact.malt_url || '#'}" class="btn btn-primary" target="_blank">Malt</a>
+            <!-- Security: added rel="noopener noreferrer" to prevent reverse tabnabbing -->
+            <a href="${contact.linkedin_url || '#'}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="${contact.malt_url || '#'}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Malt</a>
         </div>
     `;
 }
