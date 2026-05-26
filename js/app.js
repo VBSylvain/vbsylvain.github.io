@@ -51,7 +51,8 @@ async function init() {
     setupGodTierEffects();
     applyState();
 
-    if (localStorage.getItem('portfolio-theme')) {
+    const shouldShowThemePicker = window.location.hash === '#landing-screen' || window.location.hash === '#themes';
+    if (!shouldShowThemePicker && localStorage.getItem('portfolio-theme')) {
         showPortfolio();
     }
 
@@ -140,6 +141,10 @@ function setupEventListeners() {
     document.querySelectorAll('.theme-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             if (btn.classList.contains('disabled')) return;
+            if (btn.dataset.route) {
+                window.location.href = btn.dataset.route;
+                return;
+            }
             state.currentTheme = btn.dataset.theme;
             localStorage.setItem('portfolio-theme', state.currentTheme);
             showPortfolio();
