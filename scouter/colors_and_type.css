@@ -1,0 +1,338 @@
+/* ============================================================
+   SCOUTER HUD — Design Tokens (v2 · Ice Lens)
+   Sylvain VIZZINI portfolio · Nappa/Zarbon-style cockpit HUD
+   ============================================================ */
+
+/* --- WEBFONTS ----------------------------------------------- */
+/* All four come from Google Fonts. If you want to host locally,
+   drop .woff2 files into /fonts and swap these @imports for
+   @font-face declarations. */
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Share+Tech+Mono&family=VT323&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ============================================================
+     COLOR — Looking through tinted glass
+     ============================================================
+     The viewer wears a Saiyan-issue scouter, but not Vegeta's red
+     lens — Nappa's ice-blue / Zarbon's cyan. Everything reads off
+     a cool blue glass with violet accents. Four HUD tones drive
+     every readout:
+        ice (data)  ·  violet (secondary)  ·  amber (warning)  ·
+        crimson (alert / OVER 9000).
+     Behind the glass: deep navy void with saiyan-armor accents.
+  */
+
+  /* HUD ice — the cool blue glow of the scouter lens */
+  --hud-ice-100: #dceffa;
+  --hud-ice-300: #9fdbff;
+  --hud-ice:     #5cd6ff;   /* primary readout color */
+  --hud-ice-700: #1f8ed0;
+  --hud-ice-900: #0a4d80;
+  --hud-ice-glow: rgba(92, 214, 255, 0.55);
+  --hud-ice-dim:  rgba(92, 214, 255, 0.18);
+
+  /* HUD violet — secondary scale, hover, Nappa-pink accents */
+  --hud-violet-100: #ecd0ff;
+  --hud-violet:     #c77dff;
+  --hud-violet-700: #6b2d99;
+  --hud-violet-glow: rgba(199, 125, 255, 0.5);
+
+  /* HUD amber — secondary scale, marquees, side data */
+  --hud-amber-100: #fff1c2;
+  --hud-amber:     #ffc933;
+  --hud-amber-700: #cc8a00;
+  --hud-amber-glow: rgba(255, 201, 51, 0.45);
+
+  /* HUD crimson — high power level, danger, alert blinker */
+  --hud-crimson-100: #ffd2d6;
+  --hud-crimson:     #ff2238;
+  --hud-crimson-700: #9c0014;
+  --hud-crimson-glow: rgba(255, 34, 56, 0.55);
+
+  /* Lens chrome — the bezel that frames the screen */
+  --lens-chrome:      #4cd3ff;
+  --lens-chrome-glow: rgba(76, 211, 255, 0.45);
+
+  /* Backwards-compat aliases — old preview cards still load these */
+  --hud-phosphor-100: var(--hud-ice-100);
+  --hud-phosphor-300: var(--hud-ice-300);
+  --hud-phosphor:     var(--hud-ice);
+  --hud-phosphor-700: var(--hud-ice-700);
+  --hud-phosphor-900: var(--hud-ice-900);
+  --hud-phosphor-glow: var(--hud-ice-glow);
+  --hud-phosphor-dim:  var(--hud-ice-dim);
+  --lens-cyan: var(--lens-chrome);
+  --lens-cyan-glow: var(--lens-chrome-glow);
+
+  /* Vegeta armor palette — pulled from the saiyan prince's classic
+     ceremonial armor: royal navy plate, white spaulders, gold trim. */
+  --saiyan-navy:    #1a2772;
+  --saiyan-navy-deep: #0d143a;
+  --saiyan-white:   #f3f1e8;
+  --saiyan-gold:    #e8b339;
+  --saiyan-gold-deep: #8a6516;
+
+  /* Background — the deep-space void seen through the lens */
+  --void-100: #060914;   /* almost-black navy */
+  --void-200: #0a0f1f;
+  --void-300: #121831;
+  --void-400: #1a2348;
+  --void-line: rgba(92, 214, 255, 0.12);   /* hairline grid */
+  --void-line-strong: rgba(92, 214, 255, 0.32);
+
+  /* Semantic backgrounds */
+  --bg-page:    var(--void-100);
+  --bg-panel:   rgba(10, 15, 31, 0.78);
+  --bg-panel-strong: rgba(10, 15, 31, 0.92);
+  --bg-readout: rgba(92, 214, 255, 0.06);
+
+  /* Semantic foregrounds */
+  --fg-primary:   var(--hud-ice);
+  --fg-secondary: var(--hud-ice-300);
+  --fg-muted:     rgba(159, 219, 255, 0.55);
+  --fg-deemph:    rgba(159, 219, 255, 0.3);
+  --fg-onAlert:   var(--hud-crimson);
+  --fg-onWarn:    var(--hud-amber);
+
+  /* Borders & dividers */
+  --border-hairline: 1px solid var(--void-line);
+  --border-hud:      1px solid var(--hud-ice-700);
+  --border-hud-soft: 1px solid var(--hud-ice-dim);
+  --border-alert:    1px solid var(--hud-crimson-700);
+
+  /* Shadows & glows */
+  --glow-sm: 0 0 6px var(--hud-ice-glow);
+  --glow-md: 0 0 14px var(--hud-ice-glow);
+  --glow-lg: 0 0 32px var(--hud-ice-glow);
+  --glow-violet: 0 0 16px var(--hud-violet-glow);
+  --glow-alert: 0 0 18px var(--hud-crimson-glow);
+  --inner-readout: inset 0 0 18px rgba(92, 214, 255, 0.12);
+
+  /* ============================================================
+     TYPE — All-caps military telemetry stack
+     ============================================================
+     Two phosphor faces (VT323, Share Tech Mono) handle 95% of UI:
+     low-res chunky digits + cleaner mono labels. Saira Stencil One
+     does the saiyan-stenciled display headers. Inter survives as
+     the longform body-copy fallback for description prose.
+  */
+  --font-display:  'Saira Stencil One', 'Impact', 'Arial Black', sans-serif;
+  --font-hud:      'Orbitron', 'Eurostile', 'Bank Gothic', sans-serif;
+  --font-readout:  'Share Tech Mono', 'Consolas', monospace;
+  --font-digits:   'VT323', 'Courier New', monospace;
+  --font-body:     'Inter', system-ui, sans-serif;
+
+  /* Type scale */
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-24: 1.5rem;
+  --fs-32: 2rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+  --fs-96: 6rem;
+
+  /* Letter spacing */
+  --tracking-wide:    0.12em;   /* HUD labels */
+  --tracking-wider:   0.2em;    /* small-caps sublabels */
+  --tracking-widest:  0.32em;   /* section banner */
+  --tracking-tight:   -0.01em;  /* large digits */
+
+  /* Radii — the scouter has zero rounded corners.
+     Cards are hard chamfers via clip-path; only buttons get a
+     tiny radius. */
+  --radius-0:  0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  /* Spacing scale — tight HUD grid, 4px base */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+
+  /* Motion — terse, mechanical. Not springy. */
+  --ease-snap:  cubic-bezier(0.2, 0.9, 0.3, 1);
+  --ease-glide: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 120ms;
+  --t-med:  220ms;
+  --t-slow: 420ms;
+}
+
+/* ============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================ */
+
+.t-banner {                         /* big stenciled section banner */
+  font-family: var(--font-display);
+  font-size: var(--fs-48);
+  letter-spacing: var(--tracking-wide);
+  color: var(--hud-phosphor);
+  text-transform: uppercase;
+  text-shadow: var(--glow-md);
+  line-height: 1;
+}
+
+.t-h1 {                              /* hero name */
+  font-family: var(--font-hud);
+  font-weight: 900;
+  font-size: var(--fs-96);
+  letter-spacing: var(--tracking-tight);
+  color: var(--hud-phosphor);
+  text-transform: uppercase;
+  text-shadow: var(--glow-lg);
+  line-height: 0.9;
+}
+
+.t-h2 {                              /* panel header */
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  letter-spacing: var(--tracking-wide);
+  color: var(--hud-phosphor);
+  text-transform: uppercase;
+}
+
+.t-h3 {                              /* item title (e.g. company) */
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: var(--fs-18);
+  letter-spacing: var(--tracking-wide);
+  color: var(--hud-phosphor-100);
+  text-transform: uppercase;
+}
+
+.t-readout {                         /* monospace HUD label / sublabel */
+  font-family: var(--font-readout);
+  font-size: var(--fs-14);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-secondary);
+  text-transform: uppercase;
+}
+
+.t-readout-sm {
+  font-family: var(--font-readout);
+  font-size: var(--fs-12);
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+}
+
+.t-digits {                          /* the big power-level numbers */
+  font-family: var(--font-digits);
+  font-size: var(--fs-96);
+  color: var(--hud-amber);
+  text-shadow: 0 0 14px var(--hud-amber-glow);
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tight);
+}
+
+.t-digits-md {
+  font-family: var(--font-digits);
+  font-size: var(--fs-48);
+  color: var(--hud-amber);
+  text-shadow: 0 0 8px var(--hud-amber-glow);
+  line-height: 1;
+}
+
+.t-body {                            /* longform prose */
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  line-height: 1.55;
+  color: var(--fg-secondary);
+}
+
+.t-alert {                           /* crimson over-9000 alert text */
+  font-family: var(--font-hud);
+  font-weight: 900;
+  color: var(--hud-crimson);
+  text-shadow: var(--glow-alert);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+/* ============================================================
+   GLOBAL EFFECTS — Apply at body level for full-page lens look
+   ============================================================ */
+
+/* CRT scanlines — overlay on any panel via .has-scanlines */
+.has-scanlines {
+  position: relative;
+}
+.has-scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.35) 3px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: multiply;
+}
+
+/* Subtle horizontal flicker — apply to digit readouts for life */
+@keyframes hud-flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.72; }
+  95% { opacity: 0.95; }
+  97% { opacity: 0.6; }
+}
+.is-flickering { animation: hud-flicker 4.6s steps(1, end) infinite; }
+
+/* Scan beam — sweeps top to bottom on first reveal */
+@keyframes scan-beam {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+.scan-beam {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, var(--hud-phosphor), transparent);
+  box-shadow: var(--glow-lg);
+  pointer-events: none;
+  z-index: 99;
+  animation: scan-beam 3.4s var(--ease-glide) infinite;
+}
+
+/* Lens vignette — radial darkening from edges so the "glass" feels round */
+.lens-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center,
+      transparent 0%,
+      transparent 55%,
+      rgba(10, 14, 10, 0.65) 90%,
+      rgba(0, 0, 0, 0.95) 100%);
+  z-index: 60;
+}
+
+/* Bracket frame — the [ ] corners that mark targets / actionable items */
+.brackets {
+  position: relative;
+  padding: var(--sp-4);
+}
+.brackets::before,
+.brackets::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 2px solid var(--hud-phosphor);
+  filter: drop-shadow(0 0 4px var(--hud-phosphor-glow));
+}
+.brackets::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.brackets::after  { bottom: 0; right: 0; border-left: none; border-top: none; }

@@ -6,7 +6,7 @@
     <title>Sylvain VIZZINI — Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Italiana&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Italiana&family=Libre+Baskerville:wght@400;700&family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/90s.css">
     <link rel="stylesheet" href="css/pizzeria.css">
@@ -18,14 +18,15 @@
     <div id="cursor-dot" class="cursor-dot"></div>
 
     <!-- Theme Selector Landing Screen -->
-    <div id="landing-screen" class="landing-screen">
+    <div id="landing-screen" class="landing-screen" data-anchor="themes">
         <div class="landing-content">
             <h1>Sylvain VIZZINI</h1>
             <p class="landing-subtitle">Scrum Master · Product Manager · Consultant Agile Senior</p>
             <div class="theme-picker">
                 <button class="theme-btn active" data-theme="standard">Standard</button>
-                <button class="theme-btn disabled" data-theme="dbz">
-                    Dragon Ball Z <span class="badge">Coming Soon</span>
+                <button class="theme-btn" data-theme="scouter" data-route="scouter/index.html">
+                    <span class="dbz-label">Dragon Ball Z</span>
+                    <span class="badge">SCAN</span>
                 </button>
                 <button class="theme-btn disabled" data-theme="naruto">
                     Naruto <span class="badge">Coming Soon</span>
