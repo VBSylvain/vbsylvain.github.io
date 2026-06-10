@@ -1,0 +1,22 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sharIris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e44141"></stop>
+      <stop offset="55%" stop-color="#b71c1c"></stop>
+      <stop offset="100%" stop-color="#4a0a0a"></stop>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#sharIris)" stroke="#160404" stroke-width="2"></circle>
+  <circle cx="50" cy="50" r="9" fill="#0a0202"></circle>
+  <g fill="#0a0202">
+    <g transform="translate(50 50) rotate(0)">
+      <path d="M 0 -28 C 5 -28 8 -23 5 -18 C 2 -14 -3 -14 -5 -18 C -7 -22 -4 -28 0 -28 Z"></path>
+    </g>
+    <g transform="translate(50 50) rotate(120)">
+      <path d="M 0 -28 C 5 -28 8 -23 5 -18 C 2 -14 -3 -14 -5 -18 C -7 -22 -4 -28 0 -28 Z"></path>
+    </g>
+    <g transform="translate(50 50) rotate(240)">
+      <path d="M 0 -28 C 5 -28 8 -23 5 -18 C 2 -14 -3 -14 -5 -18 C -7 -22 -4 -28 0 -28 Z"></path>
+    </g>
+  </g>
+</svg>

@@ -60,6 +60,7 @@ async function init() {
         const response = await fetch('career.json');
         if (!response.ok) throw new Error("Fetch failed");
         state.data = await response.json();
+        window.__careerData = state.data;
         render();
     } catch (error) {
         console.error("Data error:", error);
@@ -202,6 +203,7 @@ function render() {
     renderContact();
     setupPizzeriaMenu();
     setupScrollReveal();
+    window.dispatchEvent(new CustomEvent('portfolio:rendered', { detail: { theme: state.currentTheme } }));
 }
 
 function setupPizzeriaMenu() {
