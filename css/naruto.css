@@ -1,0 +1,1320 @@
+/* =============================================================
+   NARUTO THEME — "Wandering Shinobi"
+   Post-4th-War Sasuke. Tri-dōjutsu. Tailed-beast chakra cloak.
+   No Konoha. No Naruto / Sakura / Lee references.
+   Sister-file: js/naruto.js (animations, sigils, easter eggs)
+   ============================================================= */
+
+/* === FONTS (declared by index.html via Google Fonts link) ===
+   Cinzel        — display/hero (Akatsuki cloak energy)
+   Cormorant Garamond italic — card titles, melancholy
+   Inter         — UI / metadata
+   Shippori Mincho — kanji decoration
+*/
+
+/* ----- TOKENS ----- */
+body.theme-naruto {
+    --naruto-void:        #07060a;
+    --naruto-cave:        #110a14;
+    --naruto-stone:       #1c1422;
+    --naruto-stone-2:     #261a30;
+    --naruto-blood:       #c01c1c;
+    --naruto-blood-bright:#e44141;
+    --naruto-blood-dim:   #7a1212;
+    --naruto-blood-glow:  rgba(192, 28, 28, 0.45);
+    --naruto-rin:         #8a3dd6;
+    --naruto-rin-deep:    #4a1a8a;
+    --naruto-rin-glow:    rgba(138, 61, 214, 0.35);
+    --naruto-byaku:       #d8d3e8;
+    --naruto-byaku-dim:   #8a8398;
+    --naruto-chakra:      #ff7a1c;          /* tailed-beast aura, used SPARINGLY */
+    --naruto-bone:        #f0e6cf;
+    --naruto-silver:      #b5b1c2;
+    --naruto-mist:        #5a5168;
+    --naruto-ink:         #02010a;
+
+    /* Remap base tokens */
+    --primary:            var(--naruto-void);
+    --primary-light:      var(--naruto-cave);
+    --accent:             var(--naruto-blood);
+    --accent-secondary:   var(--naruto-rin);
+    --accent-glow:        var(--naruto-blood-glow);
+    --bg-card:            rgba(20, 14, 26, 0.78);
+    --text-main:          var(--naruto-bone);
+    --text-muted:         var(--naruto-byaku-dim);
+    --border:             rgba(192, 28, 28, 0.18);
+    --shadow:             0 28px 70px rgba(0,0,0,0.7), 0 0 80px rgba(192, 28, 28, 0.06);
+    --transition:         all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+    background-color: var(--naruto-void);
+    color: var(--naruto-bone);
+    font-family: 'Inter', sans-serif;
+    cursor: none;
+}
+
+/* ----- WORLD: void + red moon + kanji storm ----- */
+/* Tone down red wash on background, lean into chakra purple/orange */
+body.theme-naruto {
+    background-image:
+        radial-gradient(circle at 88% 8%, rgba(122, 20, 20, 0.16) 0%, rgba(122, 20, 20, 0.05) 14%, transparent 28%),
+        radial-gradient(circle at 8% 92%, rgba(138, 61, 214, 0.22) 0%, transparent 36%),
+        radial-gradient(circle at 96% 96%, rgba(255, 122, 28, 0.12) 0%, transparent 32%),
+        linear-gradient(180deg, #07060a 0%, #110a14 55%, #07060a 100%);
+    background-attachment: fixed;
+}
+
+/* Cave scanline texture overlay */
+body.theme-naruto::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        repeating-linear-gradient(0deg, rgba(216,211,232,0.025) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(2,1,10,0.55) 100%);
+    mix-blend-mode: soft-light;
+}
+
+/* Red moon — dimmer + smaller bloom per user feedback */
+body.theme-naruto::after {
+    content: "";
+    position: fixed;
+    top: 4vh; right: 5vw;
+    width: 11vw; height: 11vw;
+    max-width: 170px; max-height: 170px;
+    min-width: 90px; min-height: 90px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 35%, #b04444 0%, #7a1414 45%, #380606 85%, #1a0303 100%);
+    box-shadow:
+        0 0 36px rgba(122, 20, 20, 0.32),
+        0 0 80px rgba(122, 20, 20, 0.18),
+        inset -6px -6px 16px rgba(0,0,0,0.55);
+    pointer-events: none;
+    z-index: 2;
+    filter: blur(0.4px);
+    opacity: 0.62;
+    animation: narutoMoonPulse 10s ease-in-out infinite;
+}
+@keyframes narutoMoonPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.7;  transform: scale(1.03); }
+}
+
+/* Floating kanji storm — populated by JS (.naruto-kanji-storm > .nk) */
+.naruto-kanji-storm {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+.naruto-kanji-storm .nk {
+    position: absolute;
+    font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
+    font-weight: 700;
+    color: var(--naruto-bone);
+    opacity: 0.04;
+    user-select: none;
+    line-height: 0.85;
+    text-shadow: 0 0 40px rgba(192, 28, 28, 0.2);
+    animation: nkDrift var(--nk-dur, 60s) ease-in-out infinite alternate;
+}
+@keyframes nkDrift {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to   { transform: translate(var(--nk-dx, 30px), var(--nk-dy, -40px)) rotate(var(--nk-r, 3deg)); }
+}
+
+/* Hide the default overlays (noise svg) — replaced by our own world */
+body.theme-naruto .noise-overlay {
+    background: none;
+    opacity: 0;
+}
+
+/* ----- CUSTOM CURSOR: Gudōdama (Truth-Seeking Orb) -----
+   Six Paths black sphere with chakra aura. Lore-specific
+   to Madara / Obito / Naruto-SoSP era. Aura shifts purple
+   → orange on hover (passive → active chakra). */
+body.theme-naruto .custom-cursor {
+    width: 28px; height: 28px;
+    background:
+        radial-gradient(circle at 35% 35%, #1a0820 0%, #02010a 55%, #000 100%);
+    border: none;
+    backdrop-filter: none;
+    box-shadow:
+        0 0 0 1px rgba(216, 211, 232, 0.18),
+        0 0 14px rgba(138, 61, 214, 0.55),
+        0 0 28px rgba(138, 61, 214, 0.25),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.06);
+    filter: none;
+    animation: gudodamaPulse 3.2s ease-in-out infinite;
+    mix-blend-mode: normal;
+    transition: width 0.18s ease, height 0.18s ease, box-shadow 0.25s ease;
+}
+body.theme-naruto .custom-cursor.hover {
+    width: 40px; height: 40px;
+    background:
+        radial-gradient(circle at 35% 35%, #1a0820 0%, #02010a 55%, #000 100%);
+    border: none;
+    box-shadow:
+        0 0 0 1px rgba(255, 122, 28, 0.6),
+        0 0 22px rgba(255, 122, 28, 0.6),
+        0 0 44px rgba(255, 122, 28, 0.35),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.08);
+    filter: none;
+    animation: gudodamaPulse 1.6s ease-in-out infinite;
+}
+body.theme-naruto .cursor-dot {
+    width: 4px; height: 4px;
+    background: var(--naruto-chakra);
+    box-shadow: 0 0 8px var(--naruto-chakra), 0 0 18px rgba(255, 122, 28, 0.55);
+    mix-blend-mode: normal;
+}
+@keyframes gudodamaPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%      { transform: translate(-50%, -50%) scale(1.08); }
+}
+@keyframes narutoSharSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ===========================================================
+   CHAKRA SYSTEM — more present, lore-anchored
+   =========================================================== */
+
+/* Persistent chakra mist along bottom edge (Kurama cloak undertone) */
+.naruto-chakra-mist {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 24vh;
+    pointer-events: none;
+    z-index: 2;
+    background:
+        radial-gradient(ellipse at 18% 100%, rgba(255, 122, 28, 0.22), transparent 55%),
+        radial-gradient(ellipse at 82% 100%, rgba(255, 122, 28, 0.17), transparent 60%),
+        radial-gradient(ellipse at 50% 110%, rgba(192, 28, 28, 0.10), transparent 50%);
+    mix-blend-mode: screen;
+    animation: chakraMistShift 14s ease-in-out infinite alternate;
+    filter: blur(8px);
+}
+@keyframes chakraMistShift {
+    0%   { transform: translateY(6px) scaleX(1);    opacity: 0.85; }
+    100% { transform: translateY(-4px) scaleX(1.06); opacity: 1; }
+}
+
+/* Always-on ambient motes (subtle), idle adds a denser burst */
+.naruto-mote.ambient {
+    width: 3px; height: 3px;
+    opacity: 0;
+    animation-duration: var(--mote-dur, 12s);
+}
+
+/* Truth-Seeking Orbs (Gudōdama) cluster floating in hero area */
+.naruto-gudodama-cluster {
+    position: absolute;
+    top: 3rem;
+    right: 6vw;
+    width: 260px; height: 260px;
+    pointer-events: none;
+    z-index: 3;
+}
+.naruto-gudodama-cluster .go {
+    position: absolute;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 35%, #2a0a32 0%, #02010a 55%, #000 100%);
+    box-shadow:
+        0 0 0 1px rgba(216, 211, 232, 0.12),
+        0 0 16px rgba(138, 61, 214, 0.55),
+        0 0 32px rgba(138, 61, 214, 0.25);
+    animation: goFloat var(--go-dur, 7s) ease-in-out infinite alternate,
+               gudodamaPulse var(--go-pulse, 3.5s) ease-in-out infinite;
+}
+@keyframes goFloat {
+    0%   { translate: 0 0; }
+    100% { translate: var(--go-dx, 14px) var(--go-dy, -10px); }
+}
+
+/* Hero name chakra underglow + stat chakra orange undertone */
+body.theme-naruto .hero-name {
+    text-shadow:
+        0 0 36px rgba(255, 122, 28, 0.12),
+        0 0 90px rgba(255, 122, 28, 0.06);
+}
+body.theme-naruto .stat-value {
+    text-shadow:
+        0 0 24px rgba(192, 28, 28, 0.55),
+        0 0 60px rgba(255, 122, 28, 0.20);
+}
+
+/* ----- LANDING ----- */
+body.theme-naruto .landing-screen {
+    background:
+        radial-gradient(circle at 85% 18%, rgba(192, 28, 28, 0.22), transparent 40%),
+        radial-gradient(circle at 15% 85%, rgba(138, 61, 214, 0.18), transparent 42%),
+        linear-gradient(160deg, #07060a, #14081a);
+}
+body.theme-naruto .landing-content h1 {
+    background: linear-gradient(180deg, #fff 0%, #d8d3e8 40%, #c01c1c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    filter: drop-shadow(0 4px 20px rgba(192,28,28,0.45));
+}
+
+/* Theme button itself, on the landing screen */
+.theme-btn[data-theme="naruto"] {
+    position: relative;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(192, 28, 28, 0.22), transparent 65%),
+        linear-gradient(145deg, #14081a, #07060a);
+    border: 1px solid rgba(192, 28, 28, 0.45);
+    color: var(--naruto-bone);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+.theme-btn[data-theme="naruto"]::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 12px;
+    background: url('../assets/sharingan.svg') center/55% no-repeat;
+    opacity: 0.18;
+    transition: opacity 0.4s ease;
+}
+.theme-btn[data-theme="naruto"]:hover::before {
+    opacity: 0.55;
+}
+.theme-btn[data-theme="naruto"]:hover:not(.disabled) {
+    border-color: var(--naruto-blood);
+    box-shadow: 0 0 40px rgba(192, 28, 28, 0.45);
+    transform: translateY(-10px) scale(1.05);
+}
+.theme-btn[data-theme="naruto"] .badge {
+    background: var(--naruto-blood);
+    color: var(--naruto-bone);
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+}
+
+/* ===========================================================
+   PORTFOLIO CHROME
+   =========================================================== */
+
+body.theme-naruto .main-header {
+    background: rgba(7, 6, 10, 0.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(192, 28, 28, 0.22);
+    z-index: 1500;
+    position: sticky;
+}
+
+body.theme-naruto .logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.18em;
+    color: var(--naruto-bone);
+    position: relative;
+    padding-left: 2.2rem;
+}
+body.theme-naruto .logo::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    width: 1.6rem; height: 1.6rem;
+    background: url('../assets/sharingan.svg') center/contain no-repeat;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 0 6px rgba(192,28,28,0.5));
+}
+body.theme-naruto .logo::after {
+    content: "流浪";
+    margin-left: 0.7rem;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.85rem;
+    color: var(--naruto-blood);
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+}
+
+body.theme-naruto .header-btn {
+    background: rgba(20, 14, 26, 0.8);
+    border: 1px solid rgba(192, 28, 28, 0.32);
+    border-radius: 2px;
+    color: var(--naruto-bone);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 0.65rem 1.3rem;
+    position: relative;
+    overflow: hidden;
+}
+body.theme-naruto .header-btn:hover {
+    background: var(--naruto-blood);
+    border-color: var(--naruto-blood);
+    color: var(--naruto-bone);
+    box-shadow: 0 0 24px var(--naruto-blood-glow);
+}
+
+/* ===========================================================
+   CONTAINERS
+   =========================================================== */
+body.theme-naruto .container { position: relative; z-index: 10; }
+
+body.theme-naruto section { padding: 9rem 0; }
+
+/* ----- HERO ----- */
+body.theme-naruto .hero-section {
+    padding: 14rem 0 8rem;
+    text-align: center;
+    position: relative;
+}
+body.theme-naruto .hero-section::before {
+    /* "Wandering Shinobi" kanji backdrop behind hero name */
+    content: "流浪の影";
+    position: absolute;
+    top: 6rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: clamp(8rem, 22vw, 22rem);
+    color: var(--naruto-blood);
+    opacity: 0.045;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    line-height: 1;
+}
+
+body.theme-naruto .hero-content { position: relative; z-index: 2; }
+
+body.theme-naruto .hero-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 8.5vw, 7.2rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #f0e6cf 0%, #d8d3e8 40%, #c01c1c 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 30px rgba(192, 28, 28, 0.45));
+    margin-bottom: 1.6rem;
+}
+
+body.theme-naruto .hero-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--naruto-byaku);
+    letter-spacing: 0.04em;
+    margin-bottom: 2.6rem;
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem;
+}
+body.theme-naruto .hero-role::before,
+body.theme-naruto .hero-role::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 1.4rem; height: 1px;
+    background: var(--naruto-blood);
+}
+body.theme-naruto .hero-role::before { left: 0; }
+body.theme-naruto .hero-role::after  { right: 0; }
+
+body.theme-naruto .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.45rem;
+    color: var(--naruto-byaku);
+    max-width: 760px;
+    margin: 0 auto 5rem;
+    opacity: 0.92;
+    line-height: 1.55;
+}
+
+/* Hero stats — engraved chakra plates */
+body.theme-naruto .hero-stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.4rem;
+    margin-bottom: 5rem;
+}
+body.theme-naruto .stat-item {
+    background:
+        linear-gradient(155deg, rgba(38, 26, 48, 0.85), rgba(15, 10, 18, 0.92));
+    border: 1px solid rgba(192, 28, 28, 0.22);
+    border-radius: 4px;
+    padding: 2.4rem 1.4rem;
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.04),
+                0 18px 50px rgba(0,0,0,0.6),
+                0 0 0 rgba(192, 28, 28, 0);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    transform: none !important;
+    transition: box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s ease;
+}
+body.theme-naruto .stat-item::before {
+    content: "";
+    position: absolute;
+    top: 0.55rem; right: 0.55rem;
+    width: 18px; height: 18px;
+    background: url('../assets/akatsuki-cloud.svg') center/contain no-repeat;
+    opacity: 0.5;
+}
+body.theme-naruto .stat-item::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--naruto-blood), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+body.theme-naruto .stat-item:hover {
+    border-color: rgba(192, 28, 28, 0.65);
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.06),
+                0 18px 50px rgba(0,0,0,0.7),
+                0 0 36px rgba(192, 28, 28, 0.32);
+    transform: translateY(-4px) !important;
+}
+body.theme-naruto .stat-item:hover::after { opacity: 1; }
+
+body.theme-naruto .stat-value {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--naruto-blood-bright);
+    text-shadow: 0 0 24px rgba(192, 28, 28, 0.55);
+    margin-bottom: 0.4rem;
+}
+body.theme-naruto .stat-label {
+    color: var(--naruto-byaku-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+body.theme-naruto .hero-actions { gap: 1.2rem; }
+
+/* ===========================================================
+   BUTTONS — kunai geometry + chidori
+   =========================================================== */
+body.theme-naruto .btn {
+    background: transparent;
+    border: 1px solid var(--naruto-blood);
+    border-radius: 2px;
+    color: var(--naruto-bone);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    padding: 1.2rem 2.4rem;
+    position: relative;
+    overflow: visible;
+    transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+body.theme-naruto .btn::before {
+    /* notch/chakra strip on the left edge */
+    content: "";
+    position: absolute;
+    left: -1px; top: 18%;
+    width: 4px; height: 64%;
+    background: var(--naruto-blood);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+body.theme-naruto .btn:hover {
+    background: rgba(192, 28, 28, 0.12);
+    color: var(--naruto-bone);
+    transform: translateY(-3px);
+}
+body.theme-naruto .btn:hover::before {
+    background: var(--naruto-blood-bright);
+    box-shadow: 0 0 14px var(--naruto-blood-bright);
+}
+body.theme-naruto .btn-primary {
+    background: var(--naruto-blood);
+    color: var(--naruto-bone);
+    border-color: var(--naruto-blood);
+}
+body.theme-naruto .btn-primary:hover {
+    background: var(--naruto-blood-bright);
+    box-shadow: 0 0 40px var(--naruto-blood-glow);
+}
+/* Chidori container — populated by JS on hover (.chidori-host) */
+.chidori-host {
+    position: absolute;
+    inset: -8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    z-index: 5;
+}
+body.theme-naruto .btn:hover .chidori-host { opacity: 1; }
+.chidori-host .chidori-strip {
+    position: absolute;
+    inset: 0;
+    background: url('../assets/chidori-spark.svg') center/100% 100% no-repeat;
+    filter: drop-shadow(0 0 8px #b6d8ff) drop-shadow(0 0 14px rgba(127,170,255,0.7));
+    animation: chidoriFlicker 0.18s steps(2) infinite;
+}
+@keyframes chidoriFlicker {
+    0%   { transform: translate(0, 0) scaleX(1); opacity: 1; }
+    50%  { transform: translate(-2px, 1px) scaleX(-1); opacity: 0.85; }
+    100% { transform: translate(1px, -1px) scaleX(1); opacity: 1; }
+}
+
+/* ===========================================================
+   SECTION TITLES — engraved blood-red with kanji ghost
+   =========================================================== */
+body.theme-naruto .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--naruto-bone);
+    text-align: center;
+    margin-bottom: 5rem;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+body.theme-naruto .section-title::before {
+    content: attr(data-naruto-kanji);
+    position: absolute;
+    left: 50%;
+    top: -2.2rem;
+    transform: translateX(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.4rem;
+    color: var(--naruto-blood);
+    letter-spacing: 0.4em;
+    opacity: 0.75;
+}
+body.theme-naruto .section-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--naruto-blood), transparent);
+    background-size: 100% 100%;
+    box-shadow: 0 -6px 12px var(--naruto-blood);
+}
+/* kill emoji prefix that base FR/EN titles include */
+body.theme-naruto .section-title .metallic-icon { display: none; }
+
+/* ===========================================================
+   RESULTS — S-rank mission reports
+   =========================================================== */
+body.theme-naruto .results-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+body.theme-naruto .result-card {
+    background:
+        linear-gradient(155deg, rgba(38, 26, 48, 0.82), rgba(15, 10, 18, 0.92));
+    border: 1px solid rgba(192, 28, 28, 0.18);
+    border-radius: 4px;
+    padding: 2.8rem 2.2rem 2.4rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.04),
+                0 18px 50px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    transform: none !important;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+body.theme-naruto .result-card::before {
+    /* Akatsuki cloud corner mark */
+    content: "";
+    position: absolute;
+    top: 0.7rem; left: 0.7rem;
+    width: 22px; height: 22px;
+    background: url('../assets/akatsuki-cloud.svg') center/contain no-repeat;
+    opacity: 0.6;
+}
+body.theme-naruto .result-card:hover {
+    border-color: rgba(192, 28, 28, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.06),
+                0 18px 50px rgba(0,0,0,0.7),
+                0 0 40px var(--naruto-blood-glow);
+}
+body.theme-naruto .result-card .living-border::before { display: none; }
+body.theme-naruto .result-card { padding-top: 2.4rem; }
+
+/* Rank stamp (injected by naruto.js) */
+.naruto-rank {
+    position: absolute;
+    top: 0.7rem; right: 0.7rem;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--naruto-blood);
+    color: var(--naruto-bone);
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0;
+    transform: rotate(8deg);
+    box-shadow: 0 0 24px var(--naruto-blood-glow), inset 0 0 0 2px rgba(240,230,207,0.4);
+    border: 1px solid rgba(240,230,207,0.5);
+}
+.naruto-rank[data-rank="S"] { background: var(--naruto-blood-bright); }
+.naruto-rank[data-rank="A"] { background: var(--naruto-rin); box-shadow: 0 0 24px var(--naruto-rin-glow), inset 0 0 0 2px rgba(240,230,207,0.4); }
+.naruto-rank[data-rank="B"] { background: var(--naruto-stone-2); color: var(--naruto-byaku); }
+.naruto-rank[data-rank="C"] { background: transparent; color: var(--naruto-byaku-dim); border-color: var(--naruto-mist); box-shadow: none; }
+.naruto-rank[data-rank="X"] { background: #1a1a1a; color: var(--naruto-chakra); border-color: var(--naruto-chakra); box-shadow: 0 0 18px rgba(255,122,28,0.4); }
+.naruto-rank::after {
+    content: "RANK";
+    position: absolute;
+    bottom: -1.1rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-8deg);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--naruto-byaku-dim);
+}
+
+body.theme-naruto .result-value {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 3.6rem;
+    color: var(--naruto-blood-bright);
+    margin-bottom: 0.6rem;
+    text-shadow: 0 0 32px rgba(192, 28, 28, 0.55);
+    letter-spacing: 0;
+}
+body.theme-naruto .result-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--naruto-bone);
+    margin-bottom: 1.4rem;
+    line-height: 1.2;
+}
+body.theme-naruto .result-description {
+    color: var(--naruto-byaku);
+    opacity: 0.85;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px dashed rgba(216,211,232,0.12);
+}
+body.theme-naruto .result-source {
+    color: var(--naruto-byaku-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+body.theme-naruto .result-source .metallic-icon {
+    display: inline-block;
+    filter: hue-rotate(180deg) saturate(0) brightness(0.6);
+    font-size: 0.7rem;
+}
+
+/* ===========================================================
+   SKILLS — Jutsu mastery (Ninjutsu / Genjutsu / Doujutsu)
+   =========================================================== */
+body.theme-naruto .skills-list {
+    grid-template-columns: 1fr;
+    max-width: 1080px;
+    gap: 0;
+}
+.naruto-jutsu-category {
+    margin-bottom: 3.5rem;
+}
+.naruto-jutsu-category > h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--naruto-blood);
+    margin-bottom: 1.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(192, 28, 28, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+.naruto-jutsu-category > h3::before {
+    content: attr(data-kanji);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.5rem;
+    color: var(--naruto-byaku);
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+}
+.naruto-jutsu-category > h3 .cat-en {
+    color: var(--naruto-byaku-dim);
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    margin-left: auto;
+}
+.naruto-jutsu-category-skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.2rem 3rem;
+}
+
+body.theme-naruto .skill-info {
+    color: var(--naruto-bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+body.theme-naruto .skill-info span:last-child {
+    font-family: 'Cinzel', serif;
+    color: var(--naruto-blood-bright);
+    font-style: normal;
+    font-weight: 700;
+}
+body.theme-naruto .skill-bar-bg {
+    height: 6px;
+    background: rgba(216,211,232,0.06);
+    border: 1px solid rgba(216,211,232,0.08);
+    border-radius: 0;
+    overflow: visible;
+    position: relative;
+}
+body.theme-naruto .skill-bar-fill {
+    background: linear-gradient(90deg, var(--naruto-rin-deep), var(--naruto-rin), var(--naruto-blood), var(--naruto-blood-bright));
+    box-shadow: 0 0 14px var(--naruto-blood-glow);
+    border-radius: 0;
+    position: relative;
+    overflow: visible;
+}
+body.theme-naruto .skill-bar-fill::after {
+    content: "";
+    position: absolute;
+    right: -3px; top: -3px; bottom: -3px;
+    width: 6px;
+    background: var(--naruto-blood-bright);
+    box-shadow: 0 0 12px var(--naruto-blood-bright);
+}
+
+/* ===========================================================
+   TIMELINE — Mission Log
+   =========================================================== */
+body.theme-naruto .role-filters {
+    margin-bottom: 4rem;
+}
+body.theme-naruto .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(216,211,232,0.14);
+    border-radius: 0;
+    color: var(--naruto-byaku-dim);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    padding: 0.7rem 1.2rem;
+    text-transform: uppercase;
+}
+body.theme-naruto .filter-btn:hover:not(.disabled) {
+    border-color: var(--naruto-blood);
+    color: var(--naruto-bone);
+}
+body.theme-naruto .filter-btn.active {
+    background: var(--naruto-blood);
+    border-color: var(--naruto-blood);
+    color: var(--naruto-bone);
+    box-shadow: 0 0 24px var(--naruto-blood-glow);
+}
+
+body.theme-naruto .timeline-container {
+    max-width: 920px;
+    padding-left: 5rem;
+}
+body.theme-naruto .timeline-container::before {
+    background: linear-gradient(180deg, var(--naruto-blood), var(--naruto-rin), transparent);
+    width: 2px;
+    box-shadow: 0 0 12px var(--naruto-blood-glow);
+}
+
+body.theme-naruto .timeline-item { margin-bottom: 5rem; }
+
+body.theme-naruto .timeline-dot {
+    background: var(--naruto-void);
+    border: 0;
+    width: 32px; height: 32px;
+    left: -5.2rem;
+    background-image: url('../assets/akatsuki-cloud.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 14px var(--naruto-blood-glow);
+}
+
+body.theme-naruto .timeline-content {
+    background:
+        linear-gradient(155deg, rgba(38, 26, 48, 0.82), rgba(15, 10, 18, 0.92));
+    border: 1px solid rgba(192, 28, 28, 0.18);
+    border-radius: 4px;
+    padding: 2.4rem 2.4rem 2.2rem;
+    backdrop-filter: blur(6px);
+    transform: none !important;
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.04),
+                0 18px 50px rgba(0,0,0,0.6);
+    position: relative;
+}
+body.theme-naruto .timeline-content:hover {
+    border-color: rgba(192, 28, 28, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(216,211,232,0.06),
+                0 18px 50px rgba(0,0,0,0.7),
+                0 0 40px var(--naruto-blood-glow);
+}
+
+body.theme-naruto .experience-company {
+    color: var(--naruto-blood);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+body.theme-naruto .experience-company .metallic-icon { display: none; }
+
+body.theme-naruto .experience-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: var(--naruto-bone);
+    margin-bottom: 0.6rem;
+    line-height: 1.15;
+    padding-right: 4rem;
+}
+body.theme-naruto .experience-meta {
+    color: var(--naruto-byaku-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.3rem;
+}
+body.theme-naruto .experience-meta .metallic-icon { display: none; }
+body.theme-naruto .experience-desc {
+    color: var(--naruto-byaku);
+    line-height: 1.7;
+    font-size: 0.96rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.92;
+}
+
+body.theme-naruto .tag-list { gap: 0.5rem; }
+body.theme-naruto .tag {
+    background: transparent;
+    border: 1px solid rgba(216,211,232,0.16);
+    border-radius: 0;
+    color: var(--naruto-byaku);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    position: relative;
+    padding-left: 1.3rem;
+}
+body.theme-naruto .tag::before {
+    content: "";
+    position: absolute;
+    left: 0.5rem; top: 50%;
+    width: 6px; height: 6px;
+    background: url('../assets/tomoe.svg') center/contain no-repeat;
+    transform: translateY(-50%);
+}
+
+/* timeline rank tag in top-right of card */
+body.theme-naruto .timeline-content .naruto-rank {
+    top: 1rem; right: 1rem;
+}
+
+/* ===========================================================
+   CERTIFICATIONS — Scratched Headbands
+   =========================================================== */
+body.theme-naruto .certs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+body.theme-naruto .cert-card {
+    background:
+        linear-gradient(180deg, rgba(38, 26, 48, 0.92), rgba(15, 10, 18, 0.92));
+    border: 1px solid rgba(216,211,232,0.1);
+    border-radius: 4px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transform: none !important;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+}
+body.theme-naruto .cert-card::before {
+    /* Headband strip */
+    content: "";
+    display: block;
+    height: 72px;
+    background: url('../assets/scratched-headband.svg') center/cover no-repeat, linear-gradient(180deg, #14081a, #0a0408);
+}
+body.theme-naruto .cert-card > * {
+    padding-inline: 1.6rem;
+}
+body.theme-naruto .cert-card > .cert-year {
+    padding-top: 1.6rem;
+    color: var(--naruto-blood);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+}
+body.theme-naruto .cert-card .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--naruto-bone);
+    margin: 0.4rem 0;
+    line-height: 1.25;
+}
+body.theme-naruto .cert-card .cert-org {
+    color: var(--naruto-byaku-dim);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    padding-bottom: 1.6rem;
+}
+body.theme-naruto .cert-card .metallic-icon { display: none; }
+body.theme-naruto .cert-card:hover {
+    border-color: rgba(192, 28, 28, 0.45);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.65), 0 0 32px rgba(192,28,28,0.18);
+}
+
+/* ===========================================================
+   CONTACT — Send a Summoning
+   =========================================================== */
+body.theme-naruto .contact-card {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(192,28,28,0.2), transparent 28rem),
+        linear-gradient(180deg, rgba(38, 26, 48, 0.82), rgba(15, 10, 18, 0.96));
+    border: 1px solid rgba(192,28,28,0.32);
+    border-radius: 4px;
+    padding: 7rem 3rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.7);
+}
+body.theme-naruto .contact-card::before {
+    content: "";
+    position: absolute;
+    top: 1.2rem; left: 50%;
+    transform: translateX(-50%);
+    width: 88px; height: 88px;
+    background: url('../assets/rinnegan.svg') center/contain no-repeat;
+    opacity: 0.4;
+    animation: narutoSharSpin 24s linear infinite;
+}
+body.theme-naruto .contact-card h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--naruto-bone);
+    margin-bottom: 1.6rem;
+    margin-top: 4.5rem;
+    position: relative;
+}
+body.theme-naruto .contact-card h2 .metallic-icon { display: none; }
+body.theme-naruto .contact-msg {
+    color: var(--naruto-byaku);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+}
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+body.theme-naruto .main-footer {
+    border-top: 1px solid rgba(192, 28, 28, 0.18);
+    color: var(--naruto-byaku-dim);
+    opacity: 0.7;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.06em;
+}
+body.theme-naruto .ai-credit {
+    background: linear-gradient(90deg, var(--naruto-blood), var(--naruto-byaku), var(--naruto-rin));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===========================================================
+   GENJUTSU FOCUS — desaturate non-hovered cards
+   =========================================================== */
+body.theme-naruto.naruto-genjutsu-on .stat-item:not(:hover),
+body.theme-naruto.naruto-genjutsu-on .result-card:not(:hover),
+body.theme-naruto.naruto-genjutsu-on .timeline-content:not(:hover),
+body.theme-naruto.naruto-genjutsu-on .cert-card:not(:hover) {
+    filter: grayscale(0.4) blur(0.6px) brightness(0.7);
+    transition: filter 0.5s ease;
+}
+
+/* ===========================================================
+   HAND-SIGN SEQUENCE (page load + theme activation)
+   =========================================================== */
+.naruto-handsigns {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(7,6,10,0.92), rgba(7,6,10,1));
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    animation: nhsFade 1.6s ease forwards;
+}
+.naruto-handsigns .nhs-glyph {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(8rem, 22vw, 18rem);
+    color: var(--naruto-blood);
+    text-shadow: 0 0 40px var(--naruto-blood), 0 0 80px var(--naruto-blood-glow);
+    opacity: 0;
+    animation: nhsGlyph 0.4s ease forwards;
+    letter-spacing: -0.05em;
+}
+.naruto-handsigns .nhs-name {
+    position: absolute;
+    bottom: 36%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    color: var(--naruto-byaku);
+    opacity: 0;
+    animation: nhsName 0.4s ease forwards;
+    text-transform: uppercase;
+}
+@keyframes nhsFade {
+    0%   { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { opacity: 0; pointer-events: none; visibility: hidden; }
+}
+@keyframes nhsGlyph {
+    0%   { opacity: 0; transform: scale(0.6); filter: blur(20px); }
+    100% { opacity: 1; transform: scale(1);   filter: blur(0); }
+}
+@keyframes nhsName {
+    0%   { opacity: 0; transform: translate(-50%, 8px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ===========================================================
+   SCROLL-TRIGGERED JUTSU NAMES (per section)
+   =========================================================== */
+.naruto-jutsu-call {
+    position: fixed;
+    bottom: 8vh;
+    right: 4vw;
+    z-index: 80;
+    pointer-events: none;
+    text-align: right;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.naruto-jutsu-call.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.naruto-jutsu-call .jc-kanji {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 4rem;
+    color: var(--naruto-blood);
+    line-height: 1;
+    text-shadow: 0 0 20px var(--naruto-blood-glow);
+    letter-spacing: -0.02em;
+}
+.naruto-jutsu-call .jc-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.32em;
+    color: var(--naruto-byaku);
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+}
+.naruto-jutsu-call .jc-eng {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--naruto-byaku-dim);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+/* ===========================================================
+   RINNEGAN CLICK RIPPLE (concentric rings)
+   =========================================================== */
+.naruto-ripple {
+    position: fixed;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9500;
+    transform: translate(-50%, -50%);
+}
+.naruto-ripple::before,
+.naruto-ripple::after,
+.naruto-ripple .nr-ring {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--naruto-rin);
+    border-radius: 50%;
+    box-shadow: 0 0 16px var(--naruto-rin);
+    animation: nrExpand 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.naruto-ripple::after { animation-delay: 0.1s; }
+.naruto-ripple .nr-ring { animation-delay: 0.2s; border-color: var(--naruto-byaku); box-shadow: 0 0 18px rgba(216,211,232,0.5); }
+@keyframes nrExpand {
+    0%   { transform: scale(0.2); opacity: 1; }
+    100% { transform: scale(14); opacity: 0; }
+}
+
+/* ===========================================================
+   IDLE CHAKRA MOTES (>30s no activity)
+   =========================================================== */
+.naruto-mote {
+    position: fixed;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--naruto-chakra);
+    box-shadow: 0 0 10px var(--naruto-chakra), 0 0 20px rgba(255,122,28,0.55);
+    pointer-events: none;
+    z-index: 70;
+    animation: naMoteRise var(--mote-dur, 9s) linear forwards;
+    opacity: 0;
+}
+@keyframes naMoteRise {
+    0%   { opacity: 0; transform: translate(0, 0); }
+    10%  { opacity: 0.9; }
+    90%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translate(var(--mote-dx, 80px), -110vh); }
+}
+
+/* ===========================================================
+   TSUKUYOMI MODE — red/black inversion (5s)
+   =========================================================== */
+body.theme-naruto.naruto-tsukuyomi {
+    filter: invert(0.92) hue-rotate(140deg) saturate(2.4) contrast(1.1);
+    transition: filter 0.6s ease;
+}
+body.theme-naruto.naruto-tsukuyomi::after {
+    /* red moon flips into white moon in inverted space — keep it dramatic */
+    filter: brightness(0.4);
+}
+
+/* ===========================================================
+   BYAKUGAN MODE (press B) — pale outline overlay
+   =========================================================== */
+body.theme-naruto.naruto-byakugan * {
+    box-shadow: 0 0 0 0.5px rgba(216,211,232,0.5) inset, 0 0 6px rgba(216,211,232,0.18) !important;
+    transition: box-shadow 0.18s ease;
+}
+body.theme-naruto.naruto-byakugan {
+    filter: hue-rotate(20deg) saturate(0.4) brightness(1.15);
+}
+
+/* ===========================================================
+   SUSANOO OVERLAY (Konami code)
+   =========================================================== */
+.naruto-susanoo {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 50%, rgba(138,61,214,0.18), transparent 70%);
+    animation: nsuFade 9s ease forwards;
+}
+.naruto-susanoo svg {
+    width: min(80vw, 900px);
+    height: auto;
+    filter: drop-shadow(0 0 40px var(--naruto-rin)) drop-shadow(0 0 80px rgba(138,61,214,0.6));
+    animation: nsuPulse 9s ease forwards;
+}
+@keyframes nsuFade {
+    0%   { opacity: 0; }
+    8%   { opacity: 1; }
+    88%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes nsuPulse {
+    0%   { transform: scale(0.7) rotate(-4deg); }
+    12%  { transform: scale(1) rotate(0deg); }
+    88%  { transform: scale(1.04) rotate(2deg); }
+    100% { transform: scale(1.1) rotate(0deg); }
+}
+
+/* ===========================================================
+   LIVING-BORDER override — replace with red conic
+   =========================================================== */
+body.theme-naruto .living-border::before {
+    background: conic-gradient(from var(--gradient-angle), transparent, var(--naruto-blood), var(--naruto-rin), transparent);
+    animation: rotateGradient 6s linear infinite;
+}
+
+/* ===========================================================
+   METALLIC ICON (kill mercury sheen — use blood red instead)
+   =========================================================== */
+body.theme-naruto .metallic-icon {
+    filter: brightness(0.4) sepia(1) saturate(8) hue-rotate(-25deg);
+    animation: none;
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
+@media (max-width: 1024px) {
+    body.theme-naruto .timeline-container { padding-left: 3.5rem; }
+    body.theme-naruto .timeline-dot { left: -3.6rem; }
+    body.theme-naruto .experience-role { padding-right: 0; }
+    body.theme-naruto .timeline-content .naruto-rank { top: 0.6rem; right: 0.6rem; }
+    body.theme-naruto .naruto-jutsu-category-skills { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    body.theme-naruto .hero-section { padding: 9rem 0 5rem; }
+    body.theme-naruto section { padding: 5rem 0; }
+    body.theme-naruto .timeline-container { padding-left: 2.5rem; }
+    body.theme-naruto .timeline-dot { left: -2.6rem; width: 24px; height: 24px; }
+    body.theme-naruto .contact-card { padding: 4.5rem 1.5rem; }
+    body.theme-naruto::after { width: 28vw; height: 28vw; }
+    .naruto-jutsu-call { bottom: 4vh; right: 1.5rem; transform: scale(0.7) translateX(40px); transform-origin: bottom right; }
+    .naruto-jutsu-call.show { transform: scale(0.7) translateX(0); }
+    body.theme-naruto .custom-cursor, body.theme-naruto .cursor-dot { display: none; }
+    body.theme-naruto, body.theme-naruto * { cursor: auto !important; }
+}

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="byaIris" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#f8f4ff"></stop>
+      <stop offset="75%" stop-color="#d8d3e8"></stop>
+      <stop offset="100%" stop-color="#8a82a2"></stop>
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#byaIris)" stroke="#4a4458" stroke-width="2"></circle>
+  <circle cx="50" cy="50" r="3.5" fill="#4a4458" opacity="0.55"></circle>
+  <g stroke="#9a93ab" stroke-width="0.7" fill="none" opacity="0.65">
+    <path d="M 50 50 L 14 22"></path>
+    <path d="M 50 50 L 86 22"></path>
+    <path d="M 50 50 L 18 78"></path>
+    <path d="M 50 50 L 82 78"></path>
+    <path d="M 50 50 L 8 50"></path>
+    <path d="M 50 50 L 92 50"></path>
+  </g>
+</svg>
