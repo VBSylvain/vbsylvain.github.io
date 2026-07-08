@@ -80,6 +80,8 @@ function silver(emoji) {
 function setupGodTierEffects() {
     const cursor = document.getElementById('custom-cursor');
     const dot = document.getElementById('cursor-dot');
+    const portfolioContainer = document.getElementById('portfolio-container');
+    const tiltCards = document.getElementsByClassName('tilt-card');
     
     if (!cursor || !dot) return;
 
@@ -93,9 +95,10 @@ function setupGodTierEffects() {
             top: `${y}px`
         }, { duration: 400, fill: "forwards" });
 
-        const isPortfolioVisible = !document.getElementById('portfolio-container').classList.contains('hidden');
+        const isPortfolioVisible = portfolioContainer && !portfolioContainer.classList.contains('hidden');
         if (isPortfolioVisible) {
-            document.querySelectorAll('.tilt-card').forEach(card => {
+            for (let i = 0; i < tiltCards.length; i++) {
+                const card = tiltCards[i];
                 const rect = card.getBoundingClientRect();
                 const cardX = rect.left + rect.width / 2;
                 const cardY = rect.top + rect.height / 2;
@@ -103,7 +106,7 @@ function setupGodTierEffects() {
                 const angleY = (x - cardX) / (window.innerWidth / 2) * -10; 
                 card.style.setProperty('--rx', `${angleX}deg`);
                 card.style.setProperty('--ry', `${angleY}deg`);
-            });
+            }
         }
     });
 
