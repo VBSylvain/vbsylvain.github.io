@@ -311,7 +311,11 @@ function renderSkills() {
 
 function renderTimeline() {
     const lang = state.currentLang;
-    const sorted = [...state.data.experiences].sort((a, b) => new Date(b.start_date || '1900') - new Date(a.start_date || '1900'));
+    const sorted = [...state.data.experiences].sort((a, b) => {
+        const da = a.start_date || '1900';
+        const db = b.start_date || '1900';
+        return da < db ? 1 : (da > db ? -1 : 0);
+    });
     document.getElementById('timeline-container').innerHTML = sorted.map(exp => `
         <div class="timeline-item">
             <div class="timeline-dot"></div>
