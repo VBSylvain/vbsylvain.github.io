@@ -22,10 +22,11 @@ function HeroLockOn({ identity, heroStats, lang, battleMode, onToggleBattle, toP
         <p className="tagline">{identity[`tagline_${lang}`]}</p>
 
         <div className="btn-row">
-          <a className="btn primary" href="https://www.linkedin.com/in/vbsylvain" target="_blank" rel="noopener" onMouseEnter={sfx}>
+          {/* Security: Prevent reverse tabnabbing */}
+          <a className="btn primary" href="https://www.linkedin.com/in/vbsylvain" target="_blank" rel="noopener noreferrer" onMouseEnter={sfx}>
             UPLINK · LINKEDIN
           </a>
-          <a className="btn" href="https://www.malt.fr/profile/sylvainvizzinibruyas" target="_blank" rel="noopener" onMouseEnter={sfx}>
+          <a className="btn" href="https://www.malt.fr/profile/sylvainvizzinibruyas" target="_blank" rel="noopener noreferrer" onMouseEnter={sfx}>
             UPLINK · MALT
           </a>
         </div>
