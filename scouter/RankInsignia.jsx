@@ -23,8 +23,9 @@ function ContactBeacon({ contact, lang }) {
       <h2>{lang === 'fr' ? 'OUVRIR LE CANAL' : 'OPEN CHANNEL'}</h2>
       <p>{contact[`message_${lang}`]}</p>
       <div className="btn-row">
-        <a className="btn primary" href={contact.linkedin_url} target="_blank" rel="noopener" onMouseEnter={sfx}>UPLINK · LINKEDIN</a>
-        <a className="btn" href={contact.malt_url} target="_blank" rel="noopener" onMouseEnter={sfx}>UPLINK · MALT</a>
+        {/* Security: rel="noopener noreferrer" prevents reverse tabnabbing */}
+        <a className="btn primary" href={contact.linkedin_url} target="_blank" rel="noopener noreferrer" onMouseEnter={sfx}>UPLINK · LINKEDIN</a>
+        <a className="btn" href={contact.malt_url} target="_blank" rel="noopener noreferrer" onMouseEnter={sfx}>UPLINK · MALT</a>
       </div>
     </section>
   );
