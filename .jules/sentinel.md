@@ -1,0 +1,4 @@
+## 2026-05-24 - Reverse Tabnabbing Vulnerability via DOM Injection
+**Vulnerability:** External links (`target="_blank"`) generated dynamically via template literals in JavaScript lacked the `rel="noopener noreferrer"` attributes.
+**Learning:** Security attributes must be explicitly included in JavaScript templates that generate HTML, just as they would be in static HTML files. The use of DOM injection mechanisms like `innerHTML` can easily obscure missing security attributes during manual reviews if not properly examined.
+**Prevention:** Always append `rel="noopener noreferrer"` to external links utilizing `target="_blank"` both in static HTML files and in dynamically generated DOM strings. Implement automated scanning rules capable of evaluating string literals within JavaScript for security best practices.
