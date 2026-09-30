@@ -1,0 +1,4 @@
+## 2025-02-28 - Missing rel="noopener noreferrer" on external links
+**Vulnerability:** External links (`target="_blank"`) without `rel="noopener noreferrer"` can allow the newly opened tab to control the original page via the `window.opener` object, leading to potential reverse tabnabbing (phishing) attacks.
+**Learning:** Found multiple instances of `target="_blank"` without `rel="noopener noreferrer"` in both vanilla JS (`js/app.js`) and React components (`scouter/RankInsignia.jsx`, `scouter/HeroLockOn.jsx`). The React components have `rel="noopener"` but miss `noreferrer` for full coverage on older browsers and privacy.
+**Prevention:** Always include `rel="noopener noreferrer"` when using `target="_blank"` for external links, whether in standard HTML, dynamic JS template literals, or React/JSX code.
